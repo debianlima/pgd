@@ -5,7 +5,23 @@ release_alvo: v0.1.0
 estado_release: standalone_candidate
 repositorio: debianlima/pgd
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado: {}
+trabalho_compartilhado:
+  projeto: pgd
+  caminho: /tmp/wv-a03-triad-FOXDLj/pgd
+  unidade: U-PGD-02-RELEASE-1.0
+  descricao: normalizar e homologar PGD 1.0 como componente da triade T-019/T-020
+  agente: WV-A03
+  atualizado_em: '2026-08-31T01:53:30+00:00'
+  previsao_termino: '2026-08-31T09:53:30+00:00'
+  zona_exclusao:
+    - manifesto.yaml
+    - estado.md
+    - VERSION
+    - README.md
+    - contratos/**
+    - dados/**
+    - docs/**
+    - tests/**
 entradas:
   - {id: 1, caminho: README.md, tipo: documentacao, status: aceito}
   - {id: 2, caminho: VERSION, tipo: release, status: aceito}
