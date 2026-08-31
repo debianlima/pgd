@@ -1,0 +1,15 @@
+projeto: pgd
+skill_projeto: skills/pgd/SKILL.md
+competencias:
+  - id: pgd-project
+    tipo: projeto
+    ref: skills/pgd/SKILL.md
+    estado: ativa
+  - id: desenvolvedor-de-software
+    tipo: global
+    ref: metodo/desenvolvedor-de-software/SKILL.md
+    versao_minima: 15
+  - id: github-incremental-reconciliation
+    tipo: global
+    ref: metodo/github-incremental-reconciliation/SKILL.md
+    versao_minima: 7

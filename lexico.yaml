@@ -1,0 +1,8 @@
+projeto: PGD
+nome: Protocolo de Gestao Distribuida
+termos:
+  WorkSession: sessao viva de trabalho
+  TaskQueue: fila operacional de tarefas
+  ResourceLease: reserva temporaria de recurso
+  OutcomeEvidenceEnvelope: evidencia observada produzida para PGH
+  OperationalPermissionBinding: permissao runtime limitada por autorizacao PGH

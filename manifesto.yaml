@@ -1,0 +1,18 @@
+projeto: pgd
+nome: Protocolo de Gestao Distribuida
+versao_contrato: 1
+release_alvo: v0.1.0
+estado_release: standalone_candidate
+repositorio: debianlima/pgd
+skill_projeto: skills/pgd/SKILL.md
+trabalho_compartilhado: {}
+entradas:
+  - {id: 1, caminho: README.md, tipo: documentacao, status: aceito}
+  - {id: 2, caminho: VERSION, tipo: release, status: aceito}
+  - {id: 3, caminho: manifesto.yaml, tipo: estrutura, status: aceito}
+  - {id: 4, caminho: competencias.yaml, tipo: estrutura, status: aceito}
+  - {id: 5, caminho: estado.md, tipo: estrutura, status: aceito}
+  - {id: 6, caminho: lexico.yaml, tipo: estrutura, status: aceito}
+  - {id: 7, caminho: skills/pgd/SKILL.md, tipo: competencia-projeto, status: aceito}
+  - {id: 8, caminho: docs/U-PGD-01-msgcd-u20-handoff.md, tipo: linhagem, status: aceito}
+  - {id: 9, caminho: tests/verify_project.py, tipo: teste, status: aceito}
