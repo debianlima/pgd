@@ -1,8 +1,8 @@
 projeto: pgd
 nome: Protocolo de Gestao Distribuida
-versao_contrato: 1
-release_alvo: v0.1.0
-estado_release: standalone_candidate
+versao_contrato: 2
+release_alvo: v1.0.0
+estado_release: triad_release_candidate
 repositorio: debianlima/pgd
 skill_projeto: skills/pgd/SKILL.md
 trabalho_compartilhado:
@@ -32,3 +32,32 @@ entradas:
   - {id: 7, caminho: skills/pgd/SKILL.md, tipo: competencia-projeto, status: aceito}
   - {id: 8, caminho: docs/U-PGD-01-msgcd-u20-handoff.md, tipo: linhagem, status: aceito}
   - {id: 9, caminho: tests/verify_project.py, tipo: teste, status: aceito}
+
+  - id: 10
+    caminho: contratos/pgd-1.0/release.schema.json
+    tipo: contrato
+    status: pendente
+    consome: [handoff-pgh-u20]
+    produz: pgd-1.0-release-contract
+    aceite: tests/verify_release_1_0.py
+  - id: 11
+    caminho: dados/pgd-1.0/U-PGD-02-release-evidence.yaml
+    tipo: dados
+    status: pendente
+    consome: [pgd-1.0-release-contract]
+    produz: pgd-1.0-release-evidence
+    aceite: tests/verify_release_1_0.py
+  - id: 12
+    caminho: docs/U-PGD-02-release-1.0.md
+    tipo: documentacao
+    status: pendente
+    consome: [pgd-1.0-release-evidence]
+    produz: pgd-1.0-release-human-view
+    aceite: tests/verify_release_1_0.py
+  - id: 13
+    caminho: tests/verify_release_1_0.py
+    tipo: teste
+    status: pendente
+    consome: [pgd-1.0-release-human-view]
+    produz: pgd-1.0-release-gate
+    aceite: tests/verify_release_1_0.py
