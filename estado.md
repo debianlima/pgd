@@ -12,10 +12,10 @@
 - Nenhuma.
 
 ## Pendências técnicas não humanas
-- T-019/T-020 no repositório PGH: integração e homologação conjunta antes das tags finais.
+- Nenhuma local. T-019/T-020 passou no PGH U40; tag final aguarda a decisão humana H08 no projeto PGH.
 
 ## Trabalho compartilhado
-- ponteiro: `manifesto.yaml.trabalho_compartilhado` — unidade U-PGD-02-RELEASE-1.0, atualizado_em 2026-08-31T02:33:47+00:00.
+- ponteiro: `manifesto.yaml.trabalho_compartilhado` — vazio; reserva de release liberada em 2026-08-31T03:15:15+00:00.
 
 ## Competências ativas nesta unidade
 - `pgd-project@0.1.0` — skill de projeto; não alterada, pois a homologação não produziu novo aprendizado de skill.
@@ -30,4 +30,4 @@
 - 1–13.
 
 ## Próxima unidade
-- Consumir o pin PGD 1.0 em PGH U40/T-019 e executar T-020.
+- Nenhuma local antes da decisão humana H08 do PGH; depois, participar apenas do same-head/tag final da tríade.
