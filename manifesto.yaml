@@ -1,24 +1,21 @@
 projeto: pgd
 nome: Protocolo de Gestao Distribuida
-versao_contrato: 2
+versao_contrato: 3
 release_alvo: v1.0.0
 estado_release: triad_ready
 repositorio: debianlima/pgd
+identidade_execucao:
+  decisao_humana: H01-R2
+  decidida_em: '2026-08-31'
+  repositorio_protocolo: debianlima/pgd
+  repositorio_implementacao_canonica: debianlima/pgh-distributed-session-control-plane
+  nome_implementacao_preservado: true
+  runtime_paralelo_proibido: true
+  sucessor_novo: false
+  regra_fronteira: PGH autoriza; PGD executa
+  gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado:
-  projeto: pgd
-  caminho: /srv/mcp-workspace/pgd-work
-  unidade: T-016-PGD-H01-R2
-  descricao: formalizar H01-R2 preservando pgd como protocolo e pgh-distributed-session-control-plane como implementacao canonica de execucao
-  agente: redes-terminal-oracle
-  atualizado_em: '2026-08-31T02:24:47-03:00'
-  previsao_termino: '2026-08-31T03:04:47-03:00'
-  zona_exclusao:
-  - manifesto.yaml
-  - README.md
-  - estado.md
-  - tests/verify_project.py
-  - tests/verify_release_1_0.py
+trabalho_compartilhado: {}
 entradas:
 - id: 1
   caminho: README.md

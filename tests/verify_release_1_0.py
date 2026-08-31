@@ -14,5 +14,5 @@ if set(E['gates'])!=set(required) or any(E['gates'][g]!='PASS' for g in required
 if E['implementation_evidence']['rerun_in_this_unit'] is not False: fail('historical-evidence-relabeled')
 if (ROOT/'VERSION').read_text().strip()!='1.0.0': fail('version')
 m=yaml.safe_load((ROOT/'manifesto.yaml').read_text(encoding='utf-8'))
-if m.get('release_alvo')!='v1.0.0' or m.get('versao_contrato')!=2: fail('manifest-release')
+if m.get('release_alvo')!='v1.0.0' or m.get('versao_contrato')!=3: fail('manifest-release')
 print('PGD_RELEASE_1_0=PASS GATES=9/9 IMPLEMENTATION_EVIDENCE=HISTORICAL_OBSERVED_REUSED')
