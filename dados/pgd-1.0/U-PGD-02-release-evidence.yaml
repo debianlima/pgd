@@ -1,0 +1,40 @@
+schema: pgd-1.0-release-evidence-v1
+unit: U-PGD-02-RELEASE-1.0
+release:
+  protocol: PGD
+  version: 1.0.0
+  maturity: homologated
+  source_candidate_head: afa9fb405eeddeb02ac9ef8a652ee1c913605260
+ownership:
+  policy: PGA
+  semantic_authorization: PGH
+  runtime: PGD
+  outcome: PGD_observed_to_PGH
+authority_chain:
+  pgh_authorization_required: true
+  operational_permission_within_authorization: true
+  runtime_lease_owner: PGD
+  authority_expansion_forbidden: true
+implementation_evidence:
+  repository: debianlima/pgh-distributed-session-control-plane
+  commit: 85652710ac7514772b7b89043645697bae1519d6
+  classification: historical-observed-reused
+  historical_test_result: 376/376_PASS
+  rerun_in_this_unit: false
+  supports:
+    - live agents/heartbeat and session state are owned by the PGD runtime lineage
+    - claims, leases, retries and recovery fencing are implemented in the pinned lineage
+    - secret redaction and provenance fields are present in the pinned lineage
+  limitations: the 376/376 result is reused from homologated U36D evidence; fallback wireguard lacked pytest, so U-PGD-02 does not relabel it as a new execution
+protocol_gate_classification: protocol-contract-conformance; implementation evidence is separately classified
+gates:
+  PGH_AUTHORIZATION_REQUIRED: PASS
+  NO_RUNTIME_LEASE_IN_PGH: PASS
+  RESOURCE_STATE_OWNED_BY_PGD: PASS
+  OPERATIONAL_PERMISSION_WITHIN_AUTHORIZATION: PASS
+  OUTCOME_EVIDENCE_OBSERVED_ONLY: PASS
+  SESSION_PROVENANCE_COMPLETE: PASS
+  HUMAN_TAKEOVER_PROVENANCE: PASS
+  NO_SECRET_IN_SESSION_STREAM: PASS
+  EFFECT_VERIFICATION_NE_PROCESS_EXIT: PASS
+status: PASS

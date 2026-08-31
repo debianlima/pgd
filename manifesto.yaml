@@ -2,16 +2,16 @@ projeto: pgd
 nome: Protocolo de Gestao Distribuida
 versao_contrato: 2
 release_alvo: v1.0.0
-estado_release: triad_release_candidate
+estado_release: triad_ready
 repositorio: debianlima/pgd
 skill_projeto: skills/pgd/SKILL.md
 trabalho_compartilhado:
   projeto: pgd
-  caminho: /tmp/wv-a03-triad-FOXDLj/pgd
+  caminho: /tmp/wv-a03-resume/pgd
   unidade: U-PGD-02-RELEASE-1.0
   descricao: normalizar e homologar PGD 1.0 como componente da triade T-019/T-020
   agente: WV-A03
-  atualizado_em: '2026-08-31T01:53:30+00:00'
+  atualizado_em: '2026-08-31T02:33:47+00:00'
   previsao_termino: '2026-08-31T09:53:30+00:00'
   zona_exclusao:
     - manifesto.yaml
@@ -36,28 +36,28 @@ entradas:
   - id: 10
     caminho: contratos/pgd-1.0/release.schema.json
     tipo: contrato
-    status: pendente
+    status: aceito
     consome: [handoff-pgh-u20]
     produz: pgd-1.0-release-contract
     aceite: tests/verify_release_1_0.py
   - id: 11
     caminho: dados/pgd-1.0/U-PGD-02-release-evidence.yaml
     tipo: dados
-    status: pendente
+    status: aceito
     consome: [pgd-1.0-release-contract]
     produz: pgd-1.0-release-evidence
     aceite: tests/verify_release_1_0.py
   - id: 12
     caminho: docs/U-PGD-02-release-1.0.md
     tipo: documentacao
-    status: pendente
+    status: aceito
     consome: [pgd-1.0-release-evidence]
     produz: pgd-1.0-release-human-view
     aceite: tests/verify_release_1_0.py
   - id: 13
     caminho: tests/verify_release_1_0.py
     tipo: teste
-    status: pendente
+    status: aceito
     consome: [pgd-1.0-release-human-view]
     produz: pgd-1.0-release-gate
     aceite: tests/verify_release_1_0.py

@@ -7,3 +7,7 @@ Repositório standalone inicial do PGD, materializado a partir do handoff preser
 O PGD possui estado vivo de execução: WorkSession, DAG/TaskQueue, ResourcePool/ResourceLease, workers, heartbeat, retry, checkpoint, relocation, recovery, permissões operacionais e Outcome/Efficacy.
 
 Origem normativa: debianlima/protocolo-governanca-heterogenea@a68ba9b460bd1d2050d57873fdc1c648732ece07, documento docs/pgd/U-PGD-01-msgcd-u20-handoff.md.
+
+## Release 1.0
+
+PGD 1.0 é homologado somente dentro da tríade PGH 2.0 + PGD 1.0 + PGA 1.0; a evidência e os gates locais vivem em `dados/pgd-1.0/` e `tests/verify_release_1_0.py`.

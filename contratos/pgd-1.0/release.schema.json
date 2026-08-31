@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pgh.local/contracts/pgd-1.0/release.schema.json",
+  "title": "PGD 1.0 Release Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "unit",
+    "release",
+    "ownership",
+    "authority_chain",
+    "implementation_evidence",
+    "protocol_gate_classification",
+    "gates",
+    "status"
+  ],
+  "properties": {
+    "schema": {
+      "const": "pgd-1.0-release-evidence-v1"
+    },
+    "unit": {
+      "const": "U-PGD-02-RELEASE-1.0"
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol",
+        "version",
+        "maturity",
+        "source_candidate_head"
+      ],
+      "properties": {
+        "protocol": {
+          "const": "PGD"
+        },
+        "version": {
+          "const": "1.0.0"
+        },
+        "maturity": {
+          "const": "homologated"
+        },
+        "source_candidate_head": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "ownership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy",
+        "semantic_authorization",
+        "runtime",
+        "outcome"
+      ],
+      "properties": {
+        "policy": {
+          "const": "PGA"
+        },
+        "semantic_authorization": {
+          "const": "PGH"
+        },
+        "runtime": {
+          "const": "PGD"
+        },
+        "outcome": {
+          "const": "PGD_observed_to_PGH"
+        }
+      }
+    },
+    "authority_chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pgh_authorization_required",
+        "operational_permission_within_authorization",
+        "runtime_lease_owner",
+        "authority_expansion_forbidden"
+      ],
+      "properties": {
+        "pgh_authorization_required": {
+          "const": true
+        },
+        "operational_permission_within_authorization": {
+          "const": true
+        },
+        "runtime_lease_owner": {
+          "const": "PGD"
+        },
+        "authority_expansion_forbidden": {
+          "const": true
+        }
+      }
+    },
+    "implementation_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "classification",
+        "historical_test_result",
+        "rerun_in_this_unit",
+        "supports",
+        "limitations"
+      ],
+      "properties": {
+        "repository": {
+          "const": "debianlima/pgh-distributed-session-control-plane"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "classification": {
+          "const": "historical-observed-reused"
+        },
+        "historical_test_result": {
+          "const": "376/376_PASS"
+        },
+        "rerun_in_this_unit": {
+          "const": false
+        },
+        "supports": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "protocol_gate_classification": {
+      "const": "protocol-contract-conformance; implementation evidence is separately classified"
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "PGH_AUTHORIZATION_REQUIRED",
+        "NO_RUNTIME_LEASE_IN_PGH",
+        "RESOURCE_STATE_OWNED_BY_PGD",
+        "OPERATIONAL_PERMISSION_WITHIN_AUTHORIZATION",
+        "OUTCOME_EVIDENCE_OBSERVED_ONLY",
+        "SESSION_PROVENANCE_COMPLETE",
+        "HUMAN_TAKEOVER_PROVENANCE",
+        "NO_SECRET_IN_SESSION_STREAM",
+        "EFFECT_VERIFICATION_NE_PROCESS_EXIT"
+      ],
+      "properties": {
+        "PGH_AUTHORIZATION_REQUIRED": {
+          "const": "PASS"
+        },
+        "NO_RUNTIME_LEASE_IN_PGH": {
+          "const": "PASS"
+        },
+        "RESOURCE_STATE_OWNED_BY_PGD": {
+          "const": "PASS"
+        },
+        "OPERATIONAL_PERMISSION_WITHIN_AUTHORIZATION": {
+          "const": "PASS"
+        },
+        "OUTCOME_EVIDENCE_OBSERVED_ONLY": {
+          "const": "PASS"
+        },
+        "SESSION_PROVENANCE_COMPLETE": {
+          "const": "PASS"
+        },
+        "HUMAN_TAKEOVER_PROVENANCE": {
+          "const": "PASS"
+        },
+        "NO_SECRET_IN_SESSION_STREAM": {
+          "const": "PASS"
+        },
+        "EFFECT_VERIFICATION_NE_PROCESS_EXIT": {
+          "const": "PASS"
+        }
+      }
+    },
+    "status": {
+      "const": "PASS"
+    }
+  }
+}
