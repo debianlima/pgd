@@ -5,7 +5,20 @@ release_alvo: v1.0.0
 estado_release: triad_ready
 repositorio: debianlima/pgd
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado: {}
+trabalho_compartilhado:
+  projeto: pgd
+  caminho: /srv/mcp-workspace/pgd-work
+  unidade: T-016-PGD-H01-R2
+  descricao: formalizar H01-R2 preservando pgd como protocolo e pgh-distributed-session-control-plane como implementacao canonica de execucao
+  agente: redes-terminal-oracle
+  atualizado_em: '2026-08-31T02:24:47-03:00'
+  previsao_termino: '2026-08-31T03:04:47-03:00'
+  zona_exclusao:
+  - manifesto.yaml
+  - README.md
+  - estado.md
+  - tests/verify_project.py
+  - tests/verify_release_1_0.py
 entradas:
 - id: 1
   caminho: README.md
