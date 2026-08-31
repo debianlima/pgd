@@ -5,20 +5,7 @@ release_alvo: v1.0.0
 estado_release: triad_ready
 repositorio: debianlima/pgd
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado:
-  projeto: pgd
-  caminho: /srv/mcp-workspace/u31-doc-suite/pgd
-  unidade: U-PGD-03-AUXILIAR-CONSTRUCAO-CONCILIACAO
-  descricao: Incluir papel auxiliar na construcao e conciliacao incremental do PGD;
-    preparar gate sequencial para habilitar o mesmo papel no PGA somente depois do
-    fecho PGD.
-  agente: ChatGPT-Redes
-  atualizado_em: '2026-08-31T04:41:19Z'
-  previsao_termino: '2026-08-31T05:11:19Z'
-  zona_exclusao:
-  - manifesto.yaml
-  - estado.md
-  - tests/verify_project.py
+trabalho_compartilhado: {}
 entradas:
 - id: 1
   caminho: README.md

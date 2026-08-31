@@ -16,7 +16,7 @@
 - Nenhuma local para U-PGD-03 após o gate auxiliar. A sequência seguinte pertence ao PGA e só abre depois de `PGD_AUXILIAR_RECONCILIATION=PASS`.
 
 ## Trabalho compartilhado
-- U-PGD-03-AUXILIAR-CONSTRUCAO-CONCILIACAO reservada por ChatGPT-Redes para `manifesto.yaml`, `estado.md` e `tests/verify_project.py` durante esta emenda.
+- ponteiro: `manifesto.yaml.trabalho_compartilhado` — vazio; U-PGD-03 encerrada após `PGD_AUXILIAR_RECONCILIATION=PASS`.
 
 ## Competências ativas nesta unidade
 - `pgd-project@0.1.0` — skill de projeto; não alterada, pois a homologação não produziu novo aprendizado de skill.
