@@ -7,6 +7,13 @@ assert len(list(r.glob('skills/*/SKILL.md')))==1
 assert (r/'VERSION').read_text().strip()=='1.0.0'
 m=yaml.safe_load((r/'manifesto.yaml').read_text(encoding='utf-8'))
 assert m['versao_contrato']==2 and m['release_alvo']=='v1.0.0'
+a=m['auxiliar_construcao_conciliacao']
+assert a['habilitado'] is True
+assert a['natureza']=='politica_operacional_pos_release' and a['preserva_release_v1_0_0'] is True
+assert a['papel']=='auxiliar' and a['ordem']==1 and a['protocolo']=='PGD'
+assert a['participa_em']==['construcao','conciliacao_incremental']
+assert a['gate_saida']=='PGD_AUXILIAR_RECONCILIATION=PASS' and a['proximo_protocolo']=='PGA'
+assert 'nao_substitui_decisao_humana' in a['limites']
 assert 'PGH autoriza; PGD executa' in (r/'docs/U-PGD-01-msgcd-u20-handoff.md').read_text(encoding='utf-8')
 s=json.loads((r/'contratos/pgd-1.0/release.schema.json').read_text(encoding='utf-8'))
 e=yaml.safe_load((r/'dados/pgd-1.0/U-PGD-02-release-evidence.yaml').read_text(encoding='utf-8'))
