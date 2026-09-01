@@ -15,7 +15,19 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado: {}
+trabalho_compartilhado:
+  unidade: U-PGD-13-RHGD-CLOSURE-RECONCILIATION
+  agente: ChatGPT-Redes
+  previsao_termino: '2026-09-01T22:30:00Z'
+  zona_exclusao:
+  - manifesto.yaml
+  - estado.md
+  - dados/telemetria-unidades.jsonl
+  - dados/pgd-1.0/U-PGD-13-rhgd-closure-reconciliation.yaml
+  - docs/U-PGD-13-rhgd-closure-reconciliation.md
+  - tests/verify_u_pgd_13_rhgd_closure.py
+  descricao: Consumir fechamento RHGD U07 e resolver gap lateral histórico sem reescrever
+    U04/U05, release 1.0 ou runtime PGD.
 entradas:
 - id: 1
   caminho: README.md
@@ -319,6 +331,21 @@ entradas:
   - pgd-operational-context-forest-human-view
   produz: pgd-operational-context-forest-gate
   aceite: tests/verify_u_pgd_12_operational_context_forest.py
+- id: 44
+  caminho: dados/pgd-1.0/U-PGD-13-rhgd-closure-reconciliation.yaml
+  tipo: dados
+  status: em_curso
+  aceite: tests/verify_u_pgd_13_rhgd_closure.py
+- id: 45
+  caminho: docs/U-PGD-13-rhgd-closure-reconciliation.md
+  tipo: documentacao
+  status: em_curso
+  aceite: tests/verify_u_pgd_13_rhgd_closure.py
+- id: 46
+  caminho: tests/verify_u_pgd_13_rhgd_closure.py
+  tipo: teste
+  status: em_curso
+  aceite: tests/verify_u_pgd_13_rhgd_closure.py
 auxiliar_construcao_conciliacao:
   habilitado: true
   papel: auxiliar
