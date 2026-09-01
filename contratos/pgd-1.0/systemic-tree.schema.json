@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pgh.local/contracts/pgd-1.0/systemic-tree.schema.json",
+  "title": "PGD Systemic Ontological Tree",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tree_id", "tree_kind", "revision", "content_hash", "root_node_ids", "nodes", "edges", "remote_subtrees", "rag", "generated_at"],
+  "properties": {
+    "schema_version": {"const": "pgd-systemic-tree/1"},
+    "tree_id": {"type": "string", "minLength": 1, "maxLength": 240},
+    "tree_kind": {"enum": ["PROJECT_TREE", "RESOURCE_TREE", "AUTH_TREE", "TASK_TREE"]},
+    "project_ref": {"type": ["string", "null"], "maxLength": 240},
+    "revision": {"type": "integer", "minimum": 0},
+    "content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "root_node_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1, "uniqueItems": true},
+    "nodes": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["node_id", "node_type", "label", "status", "attributes", "rag_refs", "retrieval_terms"],
+        "properties": {
+          "node_id": {"type": "string", "minLength": 1, "maxLength": 240},
+          "node_type": {"enum": ["project", "task", "resource", "agent", "machine", "queue", "reservation", "lease", "capability", "auth_binding", "peer"]},
+          "label": {"type": "string", "minLength": 1, "maxLength": 300},
+          "status": {"type": "string", "minLength": 1, "maxLength": 100},
+          "attributes": {"type": "object", "additionalProperties": true},
+          "rag_refs": {"type": "array", "items": {"type": "string", "minLength": 1, "maxLength": 500}, "uniqueItems": true},
+          "retrieval_terms": {"type": "array", "items": {"type": "string", "minLength": 1, "maxLength": 160}, "uniqueItems": true}
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["from_node", "predicate", "to_node", "authority_ref"],
+        "properties": {
+          "from_node": {"type": "string", "minLength": 1},
+          "predicate": {"enum": ["HAS_TASK", "DEPENDS_ON", "HAS_RESOURCE", "QUEUED_IN", "RESERVED_BY", "LEASED_TO", "AUTHORIZED_BY", "LOCATED_AT", "ASSIGNED_TO_PROJECT", "RUNS_ON", "PEER_REF", "DERIVED_FROM"]},
+          "to_node": {"type": "string", "minLength": 1},
+          "authority_ref": {"type": "string", "minLength": 1, "maxLength": 500}
+        }
+      }
+    },
+    "remote_subtrees": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["peer_id", "tree_kind", "tree_ref", "revision", "content_hash", "authority_ref", "last_verified_at"],
+        "properties": {
+          "peer_id": {"type": "string", "minLength": 1},
+          "tree_kind": {"enum": ["PROJECT_TREE", "RESOURCE_TREE", "AUTH_TREE", "TASK_TREE"]},
+          "tree_ref": {"type": "string", "minLength": 1, "maxLength": 500},
+          "revision": {"type": "integer", "minimum": 0},
+          "content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "authority_ref": {"type": "string", "minLength": 1, "maxLength": 500},
+          "last_verified_at": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "rag": {
+      "type": "object", "additionalProperties": false,
+      "required": ["systemic_instruction", "index_ref"],
+      "properties": {
+        "systemic_instruction": {"type": "string", "minLength": 1, "maxLength": 900},
+        "index_ref": {"type": "string", "minLength": 1, "maxLength": 500}
+      }
+    },
+    "generated_at": {"type": "string", "minLength": 1}
+  }
+}

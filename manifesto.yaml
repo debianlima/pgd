@@ -15,22 +15,7 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado:
-  unidade: U-PGD-09-SYSTEMIC-ONTOLOGICAL-TREES
-  agente: ChatGPT-Redes
-  previsao_termino: "2026-09-01T20:58:57Z"
-  zona_exclusao:
-  - manifesto.yaml
-  - estado.md
-  - competencias.yaml
-  - lexico.yaml
-  - skills/pgd/SKILL.md
-  - dados/telemetria-unidades.jsonl
-  - contratos/pgd-1.0/systemic-tree.schema.json
-  - dados/pgd-1.0/U-PGD-09-systemic-ontological-trees.yaml
-  - docs/U-PGD-09-systemic-ontological-trees.md
-  - tests/verify_u_pgd_09_systemic_trees.py
-  descricao: Formalizar ProjectTree, ResourceTree, AuthTree e TaskTree por projeto como DAGs ontologicos sincronizados por WCB, com refs remotas/peer, revisao/hash e navegacao RAG.
+trabalho_compartilhado: {}
 entradas:
 - id: 1
   caminho: README.md
@@ -201,6 +186,39 @@ entradas:
   - pgd-human-reconciliation-ratification-human-view
   produz: pgd-human-reconciliation-ratification-gate
   aceite: tests/verify_u_pgd_08_human_ratification.py
+- id: 28
+  caminho: contratos/pgd-1.0/systemic-tree.schema.json
+  tipo: contrato
+  status: aceito
+  consome:
+  - pgd-human-reconciliation-ratification-evidence
+  produz: pgd-systemic-tree-contract
+  aceite: tests/verify_u_pgd_09_systemic_trees.py
+- id: 29
+  caminho: dados/pgd-1.0/U-PGD-09-systemic-ontological-trees.yaml
+  tipo: dados
+  status: aceito
+  consome:
+  - pgd-systemic-tree-contract
+  - runtime:pgh-work-context-broadcast@f5047f72914c6634982df30c8ce0f8747af5cfb3
+  produz: pgd-systemic-tree-evidence
+  aceite: tests/verify_u_pgd_09_systemic_trees.py
+- id: 30
+  caminho: docs/U-PGD-09-systemic-ontological-trees.md
+  tipo: documentacao
+  status: aceito
+  consome:
+  - pgd-systemic-tree-evidence
+  produz: pgd-systemic-tree-human-view
+  aceite: tests/verify_u_pgd_09_systemic_trees.py
+- id: 31
+  caminho: tests/verify_u_pgd_09_systemic_trees.py
+  tipo: teste
+  status: aceito
+  consome:
+  - pgd-systemic-tree-human-view
+  produz: pgd-systemic-tree-gate
+  aceite: tests/verify_u_pgd_09_systemic_trees.py
 auxiliar_construcao_conciliacao:
   habilitado: true
   papel: auxiliar

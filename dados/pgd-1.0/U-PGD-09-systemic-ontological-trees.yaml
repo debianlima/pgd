@@ -1,0 +1,198 @@
+unit: U-PGD-09-SYSTEMIC-ONTOLOGICAL-TREES
+nature: post_release_governed_architecture
+contract_version: pgd-systemic-tree/1
+wcb_dependency: f5047f72914c6634982df30c8ce0f8747af5cfb3
+project_skill_change_required: NO_IMMUTABLE_U08
+project_skill_note: >-
+  U-PGD-08 ratified skills/pgd/SKILL.md as immutable; the repetitive invariant is therefore
+  materialized in the versioned tree contract/root instruction and runtime injection, not by rewriting the historical Project-Skill.
+human_decision:
+  summary: >-
+    Projetos, recursos, autenticação e tarefas devem ser navegados por árvores sistêmicas
+    sincronizadas por WCB; cada nó pode indexar filas, reservas, leases, projetos, peers
+    remotos e referências RAG; sincronização/verificação é procedimento operacional repetitivo.
+  authority: human-operator
+  destructive_tree_mutation_waived: false
+tree_kinds:
+  PROJECT_TREE:
+    internal_model: typed_DAG
+    visual_projection: hierarchical_A_plus
+    cardinality: one_global_active_portfolio
+    purpose: selecionar projeto elegível sem reavaliar todo o portfólio
+  RESOURCE_TREE:
+    internal_model: typed_DAG
+    visual_projection: hierarchical_A_plus
+    cardinality: one_global_federated_resource_view
+    purpose: navegar recurso para localização, fila, reserva, lease, projeto e peer
+  AUTH_TREE:
+    internal_model: typed_DAG
+    visual_projection: hierarchical_A_plus
+    cardinality: one_global_authorization_reference_view
+    purpose: navegar bindings/escopos/autoridades por referência sem carregar segredo
+    secret_material_allowed: false
+  TASK_TREE:
+    internal_model: typed_DAG
+    visual_projection: hierarchical_A_plus
+    cardinality: one_per_enabled_project
+    purpose: navegar ramos independentes/interdependentes e selecionar próxima tarefa elegível
+node_types:
+- project
+- task
+- resource
+- agent
+- machine
+- queue
+- reservation
+- lease
+- capability
+- auth_binding
+- peer
+edge_predicates:
+- HAS_TASK
+- DEPENDS_ON
+- HAS_RESOURCE
+- QUEUED_IN
+- RESERVED_BY
+- LEASED_TO
+- AUTHORIZED_BY
+- LOCATED_AT
+- ASSIGNED_TO_PROJECT
+- RUNS_ON
+- PEER_REF
+- DERIVED_FROM
+remote_subtrees:
+  required_fields:
+  - peer_id
+  - tree_kind
+  - tree_ref
+  - revision
+  - content_hash
+  - authority_ref
+  - last_verified_at
+  behavior:
+    load_full_remote_tree_by_default: false
+    fetch_by_reference_when_needed: true
+    compare_revision_and_hash_before_use: true
+    broadcast_reference_updates: true
+rag_navigation:
+  node_rag_refs_required: true
+  retrieval_terms_required: true
+  agent_instruction: >-
+    Esta é uma árvore de visão sistêmica que permite acesso ao banco RAG e navegação
+    ontológica entre recursos disponíveis de cada nó; antes de decidir, confirme o nó,
+    suas relações, revisão/hash e referências canônicas.
+  prompt_policy:
+    load_roots_first: true
+    expand_only_relevant_branch: true
+    preserve_authority_and_provenance: true
+mandatory_ritual:
+  every_work_completion: true
+  every_broadcast_receive: true
+  before_decision: compare_local_tree_revision_with_latest_applied_WCB_then_sync_if_stale
+  after_mutation: update_impacted_tree_nodes_then_emit_WCB_tree_delta
+  agent_may_skip_because_change_seems_irrelevant: false
+  local_and_distributed_same_contract: true
+wcb_tree_delta:
+  required_fields:
+  - tree_id
+  - tree_kind
+  - from_revision
+  - to_revision
+  - tree_hash
+  - delta_ref
+  - changed_node_ids
+  - invalidated_node_ids
+  - remote_refs_changed
+  - canonical_verification_required
+  coalesce_key: tree_id
+  self_delivery: true
+  no_change_audited_without_refanout: true
+storage_model:
+  canonical: SQLite_relational_graph_projection
+  local_cache: SQLite_plus_RAG_refs
+  indexing: B_tree_indices_plus_ontology_edges
+  raw_secret_storage: false
+  reason: use mature indexed storage for exact state and graph/RAG refs rather than inventing a custom tree database
+selection_policy:
+  project_selection: traverse_PROJECT_TREE_eligible_branch
+  task_selection: traverse_enabled_project_TASK_TREE_ready_frontier
+  resource_selection: traverse_RESOURCE_TREE_capability_location_queue_reservation_lease
+  auth_selection: traverse_AUTH_TREE_reference_scope_authority_only
+  global_full_rescan_default: false
+  re_evaluate_only_impacted_branch_after_delta: true
+example_resource_tree:
+  schema_version: pgd-systemic-tree/1
+  tree_id: resource://global
+  tree_kind: RESOURCE_TREE
+  project_ref: null
+  revision: 7
+  content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  root_node_ids: [resource:work34]
+  nodes:
+  - node_id: resource:work34
+    node_type: resource
+    label: Work34
+    status: READY
+    attributes: {resource_class: compute}
+    rag_refs: [rag://resources/work34]
+    retrieval_terms: [Work34, compute]
+  - node_id: queue:work34
+    node_type: queue
+    label: Work34 queue
+    status: ACTIVE
+    attributes: {depth: 2}
+    rag_refs: [rag://queues/work34]
+    retrieval_terms: [queue, Work34]
+  - node_id: reservation:r1
+    node_type: reservation
+    label: Reservation r1
+    status: HELD
+    attributes: {owner_ref: agent://aline}
+    rag_refs: [rag://reservations/r1]
+    retrieval_terms: [reservation, r1]
+  - node_id: project:pgd
+    node_type: project
+    label: PGD
+    status: ACTIVE
+    attributes: {}
+    rag_refs: [rag://projects/pgd]
+    retrieval_terms: [PGD]
+  - node_id: peer:work34
+    node_type: peer
+    label: Work34 peer
+    status: ONLINE
+    attributes: {peer_ref: peer://work34}
+    rag_refs: [rag://peers/work34]
+    retrieval_terms: [peer, Work34]
+  edges:
+  - {from_node: resource:work34, predicate: QUEUED_IN, to_node: queue:work34, authority_ref: pgd://runtime/queue}
+  - {from_node: resource:work34, predicate: RESERVED_BY, to_node: reservation:r1, authority_ref: pgd://runtime/reservation}
+  - {from_node: resource:work34, predicate: ASSIGNED_TO_PROJECT, to_node: project:pgd, authority_ref: pgd://runtime/project-assignment}
+  - {from_node: resource:work34, predicate: PEER_REF, to_node: peer:work34, authority_ref: rhgd://federation/peer}
+  remote_subtrees:
+  - peer_id: work34
+    tree_kind: RESOURCE_TREE
+    tree_ref: peer://work34/systemic/resource-tree
+    revision: 4
+    content_hash: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+    authority_ref: rhgd://federation/work34
+    last_verified_at: '2026-09-01T14:58:30Z'
+  rag:
+    systemic_instruction: Esta é uma árvore de visão sistêmica; use os refs RAG dos nós antes de expandir o ramo.
+    index_ref: rag://systemic-trees/resource/global
+  generated_at: '2026-09-01T14:58:30Z'
+gates:
+  DELTA_INVENTORY: PASS
+  LEARNING_PRESERVED: PASS
+  WCB_DEPENDENCY: PASS
+  TREE_SCHEMA: PASS
+  PROJECT_TREE: PASS
+  RESOURCE_TREE: PASS
+  AUTH_TREE: PASS
+  TASK_TREE: PASS
+  REMOTE_PEER_REFS: PASS
+  RAG_NAVIGATION: PASS
+  AUTH_NO_SECRETS: PASS
+  MANDATORY_TREE_RITUAL: PASS
+  RECONCILIATION_CLOSURE: PASS
+  DEPENDENCY_REFERENCES: PASS

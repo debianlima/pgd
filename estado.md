@@ -96,3 +96,10 @@
 ## U-PGD-09-SYSTEMIC-ONTOLOGICAL-TREES — unidade aberta
 - `telemetria_inicio=2026-09-01T14:58:57Z`; decisão humana: árvores sistêmicas compartilhadas para projetos, recursos, autenticação e tarefas, sincronizadas por WCB e navegáveis via refs RAG.
 - Visualização pode ser hierárquica/A+, mas modelo interno é DAG tipado para representar dependências cruzadas e peers remotos sem duplicação de identidade.
+
+## U-PGD-09-SYSTEMIC-ONTOLOGICAL-TREES — PASS
+- `ProjectTree`, `ResourceTree`, `AuthTree` e `TaskTree` contratadas como projeções hierárquicas sobre DAG tipado; `TaskTree` é uma por projeto habilitado.
+- ResourceTree indexa fila/reserva/lease/localização/projeto/capability/peer; `remote_subtrees` usam ref+revision+hash+authority.
+- AuthTree contém somente bindings/escopos/refs; `AUTH_NO_SECRETS=PASS`.
+- Todo nó possui refs RAG/termos; ritual obrigatório: comparar revisão com WCB antes de decidir, atualizar ramo afetado e emitir delta WCB após mutação.
+- `pgd-project@0.2.0` preservada por `U-PGD-08 immutable_blobs`; o ritual repetitivo vive no contrato/raiz das árvores e será injetado pelo runtime. `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`; `trabalho_compartilhado={}`; `v1.0.0` permanece imutável.

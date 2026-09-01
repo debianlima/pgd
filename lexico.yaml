@@ -6,3 +6,11 @@ termos:
   ResourceLease: reserva temporaria de recurso
   OutcomeEvidenceEnvelope: evidencia observada produzida para PGH
   OperationalPermissionBinding: permissao runtime limitada por autorizacao PGH
+  WorkContextBroadcast: delta operacional compacto e obrigatório produzido em toda atualização/finalização distribuída
+  SystemicTree: projeção hierárquica sobre DAG ontológico revisionado para navegação operacional
+  ProjectTree: árvore sistêmica de projetos habilitados e elegibilidade
+  ResourceTree: árvore sistêmica de recursos, filas, reservas, leases, capacidades, localização e peers
+  AuthTree: árvore de referências de autorização/escopo sem material secreto
+  TaskTree: árvore DAG de tarefas de um projeto, com ramos independentes e dependências cruzadas
+  RemoteSubtreeRef: referência a árvore de peer contendo ref, revisão, hash e autoridade
+  RAGNodeRef: referência de nó para recuperação de evidência/detalhe no banco RAG
