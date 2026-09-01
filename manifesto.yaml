@@ -15,20 +15,7 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado:
-  unidade: U-PGD-14-INCREMENTAL-RUNTIME-INFORMATION-EXCHANGE
-  agente: ChatGPT-Redes
-  inicio: '2026-09-01T22:48:52Z'
-  previsao_termino: '2026-09-02T00:18:52Z'
-  base_commit: 5c72fe2ce62bcc58897391ee99cc456ff83e14fd
-  zona_exclusao:
-  - manifesto.yaml
-  - estado.md
-  - contratos/pgd-1.0/incremental-information-exchange.schema.json
-  - dados/pgd-1.0/U-PGD-14-incremental-runtime-information-exchange.yaml
-  - docs/U-PGD-14-incremental-runtime-information-exchange.md
-  - tests/verify_u_pgd_14_incremental_runtime_information_exchange.py
-  descricao: contrato aditivo para consultas de informacao em runtime via WCB sem interromper trabalho corrente
+trabalho_compartilhado: {}
 entradas:
 - id: 1
   caminho: README.md
@@ -350,7 +337,7 @@ entradas:
 - id: 47
   caminho: contratos/pgd-1.0/incremental-information-exchange.schema.json
   tipo: contrato
-  status: pendente
+  status: aceito
   consome:
   - pgd-work-context-broadcast-contract
   - pgd-operational-context-forest-contract
@@ -359,7 +346,7 @@ entradas:
 - id: 48
   caminho: dados/pgd-1.0/U-PGD-14-incremental-runtime-information-exchange.yaml
   tipo: dados
-  status: pendente
+  status: aceito
   consome:
   - pgd-incremental-information-exchange-contract
   produz: pgd-incremental-information-exchange-evidence
@@ -367,7 +354,7 @@ entradas:
 - id: 49
   caminho: docs/U-PGD-14-incremental-runtime-information-exchange.md
   tipo: documentacao
-  status: pendente
+  status: aceito
   consome:
   - pgd-incremental-information-exchange-evidence
   produz: pgd-incremental-information-exchange-human-view
@@ -375,7 +362,7 @@ entradas:
 - id: 50
   caminho: tests/verify_u_pgd_14_incremental_runtime_information_exchange.py
   tipo: teste
-  status: pendente
+  status: aceito
   consome:
   - pgd-incremental-information-exchange-human-view
   produz: pgd-incremental-information-exchange-gate

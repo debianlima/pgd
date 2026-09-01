@@ -1,0 +1,288 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pgd-incremental-information-exchange.schema.json",
+  "title": "PGD Incremental Information Exchange",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "exchange_id",
+    "kind",
+    "request_id",
+    "source",
+    "target",
+    "query",
+    "continuation",
+    "transport",
+    "reconciliation",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "pgd-incremental-information-exchange/1"
+    },
+    "exchange_id": {
+      "type": "string",
+      "pattern": "^IIX-[0-9a-f]{24}$"
+    },
+    "kind": {
+      "enum": [
+        "REQUEST",
+        "RESPONSE"
+      ]
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^IRQ-[0-9a-f]{24}$"
+    },
+    "source": {
+      "$ref": "#/$defs/endpoint"
+    },
+    "target": {
+      "$ref": "#/$defs/target"
+    },
+    "query": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question",
+        "retrieval_terms",
+        "evidence_requirements",
+        "required_for_gate"
+      ],
+      "properties": {
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "retrieval_terms": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "type": "string",
+            "maxLength": 180
+          }
+        },
+        "evidence_requirements": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "string",
+            "maxLength": 300
+          }
+        },
+        "required_for_gate": {
+          "type": "boolean"
+        }
+      }
+    },
+    "response": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "summary",
+        "refs",
+        "uncertainty",
+        "observed_revision"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "ANSWERED",
+            "PARTIAL",
+            "NOT_FOUND",
+            "BLOCKED"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 1800
+        },
+        "refs": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "type": "string",
+            "maxLength": 500
+          }
+        },
+        "uncertainty": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "string",
+            "maxLength": 300
+          }
+        },
+        "observed_revision": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "continuation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requester_continues_work",
+        "responder_preserves_current_unit",
+        "preemption_forbidden",
+        "default_blocking"
+      ],
+      "properties": {
+        "requester_continues_work": {
+          "const": true
+        },
+        "responder_preserves_current_unit": {
+          "const": true
+        },
+        "preemption_forbidden": {
+          "const": true
+        },
+        "default_blocking": {
+          "const": false
+        }
+      }
+    },
+    "transport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "carrier",
+        "zone_mode",
+        "piggyback_preferred",
+        "no_second_scheduler"
+      ],
+      "properties": {
+        "carrier": {
+          "const": "pgh-work-context-broadcast/1"
+        },
+        "zone_mode": {
+          "enum": [
+            "SAME_ZONE",
+            "HETEROGENEOUS_ZONE"
+          ]
+        },
+        "piggyback_preferred": {
+          "const": true
+        },
+        "federation_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        },
+        "no_second_scheduler": {
+          "const": true
+        }
+      }
+    },
+    "reconciliation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "on_arrival",
+        "canonical_verification_required",
+        "response_is_evidence_not_authority",
+        "stale_response_policy",
+        "gate_wait_policy"
+      ],
+      "properties": {
+        "on_arrival": {
+          "const": "INCREMENTAL_RECONCILIATION"
+        },
+        "canonical_verification_required": {
+          "const": true
+        },
+        "response_is_evidence_not_authority": {
+          "const": true
+        },
+        "stale_response_policy": {
+          "const": "DISCARD_OR_REBASE_AFFECTED_DELTA"
+        },
+        "gate_wait_policy": {
+          "const": "ONLY_EXPLICIT_REQUIRED_FOR_GATE_MAY_BLOCK_DEPENDENT_GATE"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "endpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "agent_ref",
+        "project_ref",
+        "task_id",
+        "zone_ref",
+        "revision"
+      ],
+      "properties": {
+        "agent_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "project_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zone_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "refs"
+      ],
+      "properties": {
+        "scope": {
+          "enum": [
+            "AGENT",
+            "PROJECT",
+            "ZONE",
+            "GLOBAL"
+          ]
+        },
+        "refs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

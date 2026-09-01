@@ -146,3 +146,13 @@
 - `telemetria_inicio=2026-09-01T22:48:52Z`; decisão humana direta: formalizar consulta de informação entre agentes por WCB como avaliação incremental não bloqueante, válida em mesma zona e entre zonas heterogêneas.
 - Base=`5c72fe2ce62bcc58897391ee99cc456ff83e14fd`; `DELTA_INVENTORY=PASS`; `LEARNING_PRESERVED=PASS`; U-PGD-10 WCB e U-PGD-12 Operational Context Forest preservados, sem segundo broker/scheduler.
 - Regra de execução: consulta não preempta a unidade do solicitante nem a do respondente; somente gate explicitamente dependente da resposta pode bloquear.
+
+## U-PGD-14-INCREMENTAL-RUNTIME-INFORMATION-EXCHANGE — PASS
+- `pgd-incremental-information-exchange/1` formaliza request/response sobre WCB sem criar segundo broker/scheduler.
+- solicitante continua trabalho independente; respondente preserva unidade/claim/lease e responde por microavaliação read-only; `default_blocking=false`.
+- resposta é evidência observada, nunca autoridade; chegada exige revisão/hash/refs e `INCREMENTAL_RECONCILIATION` somente do delta afetado.
+- mesma zona usa `CommunicationGraph`; zona heterogênea mantém WCB PGD e transporte por referência RHGD, com PGD owner de runtime/fila/lease/retry/watermark.
+- somente `required_for_gate=true` pode colocar o gate dependente em `WAITING_FOR_INFORMATION`; trabalho não relacionado continua elegível.
+- `DELTA_INVENTORY=PASS`; `LEARNING_PRESERVED=PASS`; `NON_BLOCKING_DEFAULT=PASS`; `REQUEST_RESPONSE_CORRELATION=PASS`; `SAME_ZONE=PASS`; `HETEROGENEOUS_ZONE=PASS`; `NO_PREEMPTION=PASS`; `EVIDENCE_NOT_AUTHORITY=PASS`; `INCREMENTAL_RECONCILIATION=PASS`; `NO_SECOND_RUNTIME=PASS`; `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`.
+- release `v1.0.0` e `pgd-project@0.2.0` preservados; `trabalho_compartilhado={}`.
+- `telemetria_fim=2026-09-01T22:51:48Z`; resultado=`PASS`; próximo consumidor: PGH cognitivo + runtime/control-plane quando materializar suporte explícito de request/response.

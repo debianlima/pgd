@@ -1,0 +1,58 @@
+unidade: U-PGD-14-INCREMENTAL-RUNTIME-INFORMATION-EXCHANGE
+status: PASS
+contrato: pgd-incremental-information-exchange/1
+transporta_por: pgh-work-context-broadcast/1
+principios:
+  requester_continues_work: true
+  responder_preserves_current_unit: true
+  preemption_forbidden: true
+  default_blocking: false
+  response_is_evidence_not_authority: true
+  canonical_verification_required: true
+  only_required_gate_can_wait: true
+fluxo:
+- REQUEST_WCB_TARGETED
+- REQUESTER_CONTINUES_INDEPENDENT_WORK
+- RESPONDER_READONLY_MICROEVALUATION
+- RESPONSE_WCB_WITH_REFS
+- RESPONDER_CONTINUES_ORIGINAL_UNIT
+- REQUESTER_RECEIVES_LATER
+- INCREMENTAL_RECONCILIATION
+- APPLY_ONLY_AFFECTED_DELTA
+zonas:
+  SAME_ZONE:
+    carrier: PGD_WCB
+    routing: CommunicationGraph
+  HETEROGENEOUS_ZONE:
+    carrier: PGD_WCB
+    federation: RHGD_REFERENCE_TRANSPORT
+    pgd_remains_runtime_owner: true
+    second_scheduler: false
+fencing:
+  request_id_required: true
+  source_revision_required: true
+  stale_response: DISCARD_OR_REBASE_AFFECTED_DELTA
+  duplicate_response: IDEMPOTENT
+  divergent_same_revision: RECONCILE_OR_HUMAN_BLOCKED
+blocking_rule:
+  unrelated_work_never_waits_for_information: true
+  dependent_gate_waits_only_when_query_required_for_gate: true
+  absence_before_dependent_gate: WAITING_FOR_INFORMATION
+preservacao:
+  U_PGD_10_WCB: PRESERVED
+  U_PGD_12_CONTEXT_FOREST: PRESERVED
+  RHGD_NO_SECOND_SCHEDULER: PRESERVED
+  RELEASE_V1_0_0: IMMUTABLE
+gates:
+  DELTA_INVENTORY: PASS
+  LEARNING_PRESERVED: PASS
+  NON_BLOCKING_DEFAULT: PASS
+  REQUEST_RESPONSE_CORRELATION: PASS
+  SAME_ZONE: PASS
+  HETEROGENEOUS_ZONE: PASS
+  NO_PREEMPTION: PASS
+  EVIDENCE_NOT_AUTHORITY: PASS
+  INCREMENTAL_RECONCILIATION: PASS
+  NO_SECOND_RUNTIME: PASS
+  RECONCILIATION_CLOSURE: PASS
+  DEPENDENCY_REFERENCES: PASS
