@@ -15,19 +15,7 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado:
-  unidade: U-PGD-11-DYNAMIC-SYSTEMIC-VIEWS
-  agente: ChatGPT-Redes
-  previsao_termino: "2026-09-01T19:08:52Z"
-  zona_exclusao:
-  - manifesto.yaml
-  - estado.md
-  - dados/telemetria-unidades.jsonl
-  - contratos/pgd-1.0/systemic-view-sync.schema.json
-  - dados/pgd-1.0/U-PGD-11-dynamic-systemic-views.yaml
-  - docs/U-PGD-11-dynamic-systemic-views.md
-  - tests/verify_u_pgd_11_dynamic_systemic_views.py
-  descricao: Contratar materializacao e manutencao dinamica das visoes ontologicas, bootstrap de mapas macro, write-back direto/WebCX, rebase de indices locais e sincronizacao WCB.
+trabalho_compartilhado: {}
 entradas:
 - id: 1
   caminho: README.md
@@ -264,6 +252,39 @@ entradas:
   - pgd-work-context-broadcast-human-view
   produz: pgd-work-context-broadcast-gate
   aceite: tests/verify_u_pgd_10_work_context_broadcast.py
+- id: 36
+  caminho: contratos/pgd-1.0/systemic-view-sync.schema.json
+  tipo: contrato
+  status: aceito
+  consome:
+  - pgd-systemic-tree-contract
+  - pgd-work-context-broadcast-contract
+  produz: pgd-systemic-view-sync-contract
+  aceite: tests/verify_u_pgd_11_dynamic_systemic_views.py
+- id: 37
+  caminho: dados/pgd-1.0/U-PGD-11-dynamic-systemic-views.yaml
+  tipo: dados
+  status: aceito
+  consome:
+  - pgd-systemic-view-sync-contract
+  produz: pgd-dynamic-systemic-view-evidence
+  aceite: tests/verify_u_pgd_11_dynamic_systemic_views.py
+- id: 38
+  caminho: docs/U-PGD-11-dynamic-systemic-views.md
+  tipo: documentacao
+  status: aceito
+  consome:
+  - pgd-dynamic-systemic-view-evidence
+  produz: pgd-dynamic-systemic-view-human-view
+  aceite: tests/verify_u_pgd_11_dynamic_systemic_views.py
+- id: 39
+  caminho: tests/verify_u_pgd_11_dynamic_systemic_views.py
+  tipo: teste
+  status: aceito
+  consome:
+  - pgd-dynamic-systemic-view-human-view
+  produz: pgd-dynamic-systemic-view-gate
+  aceite: tests/verify_u_pgd_11_dynamic_systemic_views.py
 auxiliar_construcao_conciliacao:
   habilitado: true
   papel: auxiliar

@@ -1,0 +1,121 @@
+unit: U-PGD-11-DYNAMIC-SYSTEMIC-VIEWS
+nature: post_release_dynamic_projection_contract
+contract_version: pgd-systemic-view-sync/1
+depends_on:
+- U-PGD-09-SYSTEMIC-ONTOLOGICAL-TREES
+- U-PGD-10-WORK-CONTEXT-BROADCAST-NORMATIVE
+project_skill_change_required: NO_IMMUTABLE_U08
+project_bootstrap:
+  on_project_create_or_enable: materialize_macro_map_and_component_interconnections
+  derive_from:
+  - manifest
+  - contracts
+  - runtime_inventory
+  - authority_refs
+  - existing_tree_refs
+  global_rescan_default: false
+  inter_project_context: select_macro_map_by_project_and_domain_before_branch_expansion
+macro_maps:
+  PROJECT_MAP:
+    entrypoint: enabled_projects_and_cross_project_dependencies
+    indexes: [project, status, owner, task_tree_ref, resource_tree_ref, authority_ref]
+  INFRASTRUCTURE_MAP:
+    entrypoint: macro_map_then_relevant_branch
+    indexes: [machine, resource, queue, reservation, lease, location, capability, project_ref, peer_ref]
+  RESOURCE_MAP:
+    entrypoint: resource_class_then_capability_location_queue
+    indexes: [resource, capability, availability, queue, reservation, lease, project_ref, peer_ref]
+  AUTHORIZATION_MAP:
+    entrypoint: identity_or_task_then_scope_authority_ref
+    indexes: [identity_ref, task_ref, project_ref, capability, grant_ref, authority_ref, validity_ref]
+  TASK_MAP:
+    entrypoint: enabled_project_then_ready_frontier
+    indexes: [task, status, dependencies, allocated_agents, linked_resources, authority_refs]
+write_back:
+  channels: [DIRECT_STORE, WEB_EXECUTOR]
+  direct_store: update_canonical_graph_store_then_emit_WCB
+  web_executor: submit_graph_mutation_to_executor_then_emit_WCB_on_commit
+  every_mutation_requires_tree_update: true
+  every_tree_update_requires_broadcast: true
+  mutation_commit_requires_new_revision_and_hash: true
+  update_impacted_branch_only: true
+agent_local_view:
+  shared_base_required: true
+  base_fields: [view_id, base_revision, base_hash, last_wcb_epoch]
+  private_index_allowed: true
+  private_index_is_authority: false
+  private_index_rebase_required_on_base_change: true
+  on_broadcast: compare_base_revision_hash_then_apply_or_refetch_impacted_branch
+  stale_view_may_drive_mutation: false
+  self_origin_updates_are_reapplied_idempotently: true
+task_coordination:
+  agent_reads_own_task_in_project_task_tree: true
+  task_node_indexes:
+  - task_dependencies
+  - allocated_agents
+  - linked_resources
+  - queue_refs
+  - reservation_refs
+  - lease_refs
+  - project_ref
+  - status
+  - authority_refs
+  on_task_change: recompute_impacted_task_branch_links_then_emit_WCB
+  on_agent_allocation_change: update_task_agent_edges_then_emit_WCB
+  on_resource_binding_change: update_task_resource_edges_then_emit_WCB
+  next_task_selection: traverse_ready_frontier_without_full_project_rescan
+pgh_projection:
+  consumer: PGH_2_0
+  retrieval: macro_map_to_tree_node_to_HRAG_RAG_refs
+  root_instruction_repeated: true
+  root_instruction: >-
+    Esta é uma visão sistêmica compartilhada e versionada. Comece pelo mapa macro do domínio,
+    expanda somente o ramo necessário, confirme base_revision/base_hash e refs canônicas,
+    use HRAG/RAG para contexto adicional e sincronize via WCB antes de qualquer mutação se stale.
+  canonical_state_replacement: false
+  full_prompt_tree_copy_default: false
+security:
+  auth_tree_secret_material: false
+  credential_value_in_broadcast: false
+  authorization_refs_only: true
+  secure_credential_resolver_external: true
+example_view:
+  schema_version: pgd-systemic-view-sync/1
+  view_id: view://infra/profile-aline
+  view_kind: INFRASTRUCTURE_MAP
+  project_ref: pgd
+  base_tree_refs:
+  - tree://resource/global
+  - tree://project/global
+  base_revision: 12
+  base_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  root_entrypoints:
+  - infra://work
+  - infra://terminal
+  local_index_ref: sqlite://local/systemic_views/infra
+  private_index:
+    allowed: true
+    authority: false
+    derived_from_base_revision: 12
+    invalidate_on_base_change: true
+  last_wcb_epoch: 44
+  generated_at: '2026-09-01T15:08:00Z'
+gates:
+  DELTA_INVENTORY: PASS
+  LEARNING_PRESERVED: PASS
+  U09_TREE_CONTRACT: PASS
+  U10_WCB_CONTRACT: PASS
+  VIEW_SCHEMA: PASS
+  PROJECT_BOOTSTRAP: PASS
+  MACRO_MAPS: PASS
+  DIRECT_WRITE_BACK: PASS
+  WEB_EXECUTOR_WRITE_BACK: PASS
+  LOCAL_VIEW_REBASE: PASS
+  TASK_DYNAMIC_LINKS: PASS
+  PGH_HRAG_RAG_PROJECTION: PASS
+  AUTH_NO_SECRETS: PASS
+  MANDATORY_REPETITION: PASS
+  NO_SECOND_RUNTIME: PASS
+  RELEASE_IMMUTABILITY: PASS
+  RECONCILIATION_CLOSURE: PASS
+  DEPENDENCY_REFERENCES: PASS
