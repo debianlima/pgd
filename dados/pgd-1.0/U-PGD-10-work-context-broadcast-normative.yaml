@@ -1,0 +1,82 @@
+unit: U-PGD-10-WORK-CONTEXT-BROADCAST-NORMATIVE
+nature: post_release_normative_homologation
+contract_version: pgh-work-context-broadcast/1
+runtime_reference:
+  repository: debianlima/pgh-distributed-session-control-plane
+  closure_commit: f5047f72914c6634982df30c8ce0f8747af5cfb3
+  implementation_commit: d8bad24a6e69f31d233c8b564b30b1caa1f98426
+  schema_path: contratos/3.0/work-context-broadcast.schema.json
+  policy_path: config/3.0/work-context-broadcast.yaml
+  schema_sha256: d585dcc3fd8e180e4a8fb8bf65bc9a5662bf734b2b5a80557010af630760f456
+  policy_sha256: c8e521df62b7b53fa3cdd29a4ccb9fc3c65a39109edc6c7f80401f6e7d1117ed
+runtime_owner: debianlima/pgh-distributed-session-control-plane
+runtime_parallel_created: false
+project_skill_change_required: NO_IMMUTABLE_U08
+normative_invariants:
+  every_botv2_update: true
+  agent_relevance_decision: false
+  fallback_generation_required: true
+  self_delivery: true
+  canonical_verification_required: true
+  no_second_broker: true
+  no_second_scheduler: true
+  piggyback_next_order: true
+  standalone_when_no_actionable_work: true
+  watermark_per_destination: true
+  coalescing_preserves_event_ids: true
+no_change:
+  audit_required: true
+  fanout: false
+  purpose: prevent_feedback_loop
+watermark:
+  key: source_chat_id+coalesce_key
+  same_revision_same_payload: IDEMPOTENT
+  same_revision_different_payload: CONFLICT
+  older_revision: STALE
+mandatory_ritual:
+  every_work_completion: true
+  every_sync_update: true
+  agent_may_skip: false
+  explicit_delta_preferred: true
+  fallback_if_missing: true
+  after_receive_only_no_new_work: emit_NO_CHANGE_audit_without_fanout
+  canonical_refs_before_mutation: true
+  compact_summary_not_raw_history: true
+delivery:
+  default_standalone_after_minutes: 15
+  piggyback_sources:
+  - supervisor
+  - human
+  - fallback
+  - operational-reconciliation
+  direct_api: IMMEDIATE
+  web: WINDOWED_BATCH
+systemic_tree_integration:
+  consumer_unit: U-PGD-09-SYSTEMIC-ONTOLOGICAL-TREES
+  tree_contract: pgd-systemic-tree/1
+  tree_delta_over_wcb: true
+  tree_delta_coalesce_key: tree_id
+  compare_revision_and_hash_before_use: true
+release:
+  version: 1.0.0
+  tag: v1.0.0
+  tag_commit: 366388d8c52f696d81b7277075b87e8fc144ca1b
+  immutable: true
+gates:
+  DELTA_INVENTORY: PASS
+  LEARNING_PRESERVED: PASS
+  WCB_RUNTIME_CLOSED: PASS
+  WCB_SCHEMA_EQUIVALENCE: PASS
+  WCB_MANDATORY_RITUAL: PASS
+  WCB_FALLBACK: PASS
+  WCB_NO_CHANGE_ANTI_ECHO: PASS
+  WCB_SELF_DELIVERY: PASS
+  WCB_WATERMARK: PASS
+  WCB_COALESCING: PASS
+  WCB_PIGGYBACK: PASS
+  WCB_STANDALONE: PASS
+  NO_SECOND_RUNTIME: PASS
+  SYSTEMIC_TREE_INTEGRATION: PASS
+  RELEASE_IMMUTABILITY: PASS
+  RECONCILIATION_CLOSURE: PASS
+  DEPENDENCY_REFERENCES: PASS

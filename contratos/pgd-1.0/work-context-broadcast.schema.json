@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pgh-work-context-broadcast.schema.json",
+  "title": "PGD Work Context Broadcast",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "broadcast_id", "source", "scope", "context", "delivery", "gating", "coalesce_key", "created_at"],
+  "properties": {
+    "schema_version": {"const": "pgh-work-context-broadcast/1"},
+    "broadcast_id": {"type": "string", "pattern": "^WCB-[0-9a-f]{24}$"},
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["chat_id", "profile_ref", "project_ref", "task_id", "revision"],
+      "properties": {
+        "chat_id": {"type": "string", "minLength": 1, "maxLength": 180},
+        "profile_ref": {"type": ["string", "null"], "maxLength": 180},
+        "project_ref": {"type": "string", "minLength": 1, "maxLength": 240},
+        "task_id": {"type": ["string", "null"], "maxLength": 240},
+        "revision": {"type": "integer", "minimum": 0}
+      }
+    },
+    "scope": {"type": "object", "additionalProperties": true, "required": ["kind"], "properties": {"kind": {"type": "string", "minLength": 1}}},
+    "context": {
+      "type": "object", "additionalProperties": false,
+      "required": ["context_summary", "correlations", "knowledge_refs", "retrieval_terms", "pending_tasks", "source_refs", "work_delta"],
+      "properties": {
+        "context_summary": {"type": "string", "minLength": 1, "maxLength": 900},
+        "correlations": {"type": "array", "maxItems": 12, "items": {"type": "object"}},
+        "knowledge_refs": {"type": "array", "maxItems": 12, "items": {"type": "object"}},
+        "retrieval_terms": {"type": "array", "maxItems": 12, "items": {"type": "string", "maxLength": 160}, "uniqueItems": true},
+        "pending_tasks": {"type": "array", "maxItems": 100, "items": {"type": "object"}},
+        "source_refs": {"type": "array", "maxItems": 12, "items": {"type": "string", "maxLength": 500}, "uniqueItems": true},
+        "work_delta": {
+          "type": "object", "additionalProperties": false,
+          "required": ["result", "changed", "resolved", "remains", "invalidates", "affects"],
+          "properties": {
+            "result": {"enum": ["PASS", "BLOCKED", "FAILED", "INTERRUPTED", "PROGRESS", "UPDATED", "NO_CHANGE"]},
+            "changed": {"$ref": "#/$defs/shortList"},
+            "resolved": {"$ref": "#/$defs/shortList"},
+            "remains": {"$ref": "#/$defs/shortList"},
+            "invalidates": {"$ref": "#/$defs/shortList"},
+            "affects": {
+              "type": "object", "additionalProperties": false,
+              "required": ["projects", "tasks", "chats"],
+              "properties": {
+                "projects": {"$ref": "#/$defs/idList"},
+                "tasks": {"$ref": "#/$defs/idList"},
+                "chats": {"$ref": "#/$defs/idList"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "delivery": {
+      "type": "object", "additionalProperties": false,
+      "required": ["self_origin", "piggyback_preferred"],
+      "properties": {"self_origin": {"const": true}, "piggyback_preferred": {"const": true}}
+    },
+    "gating": {
+      "type": "object", "additionalProperties": false,
+      "required": ["required_capabilities", "safe_point_required", "canonical_verification_required", "base_revisions"],
+      "properties": {
+        "required_capabilities": {"type": "array", "items": {"const": "context-sync"}, "minItems": 1, "maxItems": 1},
+        "safe_point_required": {"const": true},
+        "canonical_verification_required": {"const": true},
+        "base_revisions": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}}
+      }
+    },
+    "coalesce_key": {"type": "string", "minLength": 1, "maxLength": 300},
+    "created_at": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "shortList": {"type": "array", "maxItems": 12, "items": {"type": "string", "maxLength": 300}, "uniqueItems": true},
+    "idList": {"type": "array", "maxItems": 12, "items": {"type": "string", "maxLength": 240}, "uniqueItems": true}
+  }
+}

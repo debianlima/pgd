@@ -106,3 +106,9 @@
 
 ## U-PGD-10-WORK-CONTEXT-BROADCAST-NORMATIVE — unidade aberta
 - `telemetria_inicio=2026-09-01T15:05:37Z`; objetivo: homologar no PGD o contrato WCB runtime `f5047f72914c6634982df30c8ce0f8747af5cfb3` sem duplicar runtime.
+
+## U-PGD-10-WORK-CONTEXT-BROADCAST-NORMATIVE — PASS
+- `pgh-work-context-broadcast/1` homologado no PGD com schema byte-equivalente ao runtime `f5047f72914c6634982df30c8ce0f8747af5cfb3`.
+- Ritual obrigatório: toda atualização/finalização gera WCB; fallback determinístico se delta explícito ausente; `NO_CHANGE` auditado sem fanout; self-origin, watermark, coalescing, piggyback e standalone 15 min preservados.
+- `SYSTEMIC_TREE_INTEGRATION=PASS`: U-PGD-09 usa WCB Tree Delta com revisão/hash por ramo.
+- `NO_SECOND_RUNTIME=PASS`; `RELEASE_IMMUTABILITY=PASS`; `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`; `trabalho_compartilhado={}`.
