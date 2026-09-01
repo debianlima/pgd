@@ -112,3 +112,6 @@
 - Ritual obrigatório: toda atualização/finalização gera WCB; fallback determinístico se delta explícito ausente; `NO_CHANGE` auditado sem fanout; self-origin, watermark, coalescing, piggyback e standalone 15 min preservados.
 - `SYSTEMIC_TREE_INTEGRATION=PASS`: U-PGD-09 usa WCB Tree Delta com revisão/hash por ramo.
 - `NO_SECOND_RUNTIME=PASS`; `RELEASE_IMMUTABILITY=PASS`; `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`; `trabalho_compartilhado={}`.
+
+## U-PGD-11-DYNAMIC-SYSTEMIC-VIEWS — unidade aberta
+- `telemetria_inicio=2026-09-01T15:08:52Z`; objetivo: transformar U09+U10 em ciclo vivo de mapas/visões ontológicas, com atualização repetitiva e verificável a cada mutação.

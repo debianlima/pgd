@@ -15,7 +15,19 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado: {}
+trabalho_compartilhado:
+  unidade: U-PGD-11-DYNAMIC-SYSTEMIC-VIEWS
+  agente: ChatGPT-Redes
+  previsao_termino: "2026-09-01T19:08:52Z"
+  zona_exclusao:
+  - manifesto.yaml
+  - estado.md
+  - dados/telemetria-unidades.jsonl
+  - contratos/pgd-1.0/systemic-view-sync.schema.json
+  - dados/pgd-1.0/U-PGD-11-dynamic-systemic-views.yaml
+  - docs/U-PGD-11-dynamic-systemic-views.md
+  - tests/verify_u_pgd_11_dynamic_systemic_views.py
+  descricao: Contratar materializacao e manutencao dinamica das visoes ontologicas, bootstrap de mapas macro, write-back direto/WebCX, rebase de indices locais e sincronizacao WCB.
 entradas:
 - id: 1
   caminho: README.md
