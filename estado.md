@@ -141,3 +141,8 @@
 - `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`.
 - release PGD `v1.0.0` permanece imutável.
 - `telemetria_fim=2026-09-01T18:09:01.239614Z`; `trabalho_compartilhado` liberado.
+
+## U-PGD-14-INCREMENTAL-RUNTIME-INFORMATION-EXCHANGE — unidade aberta
+- `telemetria_inicio=2026-09-01T22:48:52Z`; decisão humana direta: formalizar consulta de informação entre agentes por WCB como avaliação incremental não bloqueante, válida em mesma zona e entre zonas heterogêneas.
+- Base=`5c72fe2ce62bcc58897391ee99cc456ff83e14fd`; `DELTA_INVENTORY=PASS`; `LEARNING_PRESERVED=PASS`; U-PGD-10 WCB e U-PGD-12 Operational Context Forest preservados, sem segundo broker/scheduler.
+- Regra de execução: consulta não preempta a unidade do solicitante nem a do respondente; somente gate explicitamente dependente da resposta pode bloquear.
