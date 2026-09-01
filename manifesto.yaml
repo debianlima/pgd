@@ -101,6 +101,39 @@ entradas:
   caminho: logs/U-PGD-04-lat02-rhgd-lateral.log
   tipo: log
   status: aceito
+- id: 18
+  caminho: contratos/pgd-1.0/rhgd-federation.schema.json
+  tipo: contrato
+  status: aceito
+  consome:
+  - pgh2-core-reconciliation-contract
+  - pgd-1.0-release-contract
+  produz: pgd-rhgd-federation-contract
+  aceite: tests/verify_u_pgd_05_rhgd_federation.py
+- id: 19
+  caminho: dados/pgd-1.0/U-PGD-05-rhgd-federation.yaml
+  tipo: dados
+  status: aceito
+  consome:
+  - pgd-rhgd-federation-contract
+  produz: pgd-rhgd-federation-evidence
+  aceite: tests/verify_u_pgd_05_rhgd_federation.py
+- id: 20
+  caminho: docs/U-PGD-05-rhgd-federation-contract.md
+  tipo: documentacao
+  status: aceito
+  consome:
+  - pgd-rhgd-federation-evidence
+  produz: pgd-rhgd-federation-human-view
+  aceite: tests/verify_u_pgd_05_rhgd_federation.py
+- id: 21
+  caminho: tests/verify_u_pgd_05_rhgd_federation.py
+  tipo: teste
+  status: aceito
+  consome:
+  - pgd-rhgd-federation-human-view
+  produz: pgd-rhgd-federation-gate
+  aceite: tests/verify_u_pgd_05_rhgd_federation.py
 auxiliar_construcao_conciliacao:
   habilitado: true
   papel: auxiliar

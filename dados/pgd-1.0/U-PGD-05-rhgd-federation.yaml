@@ -1,0 +1,53 @@
+schema_version: pgd-rhgd-federation/1
+identity:
+  pgd_ref: a4a60387f75b89be5bbb22120349291d06acfeb0
+  pgh_core_ref: 3bc2b30df75d5a622fbdae3ee9e201d5113c94bc
+  pgh_core_contract: CT-PGH2-CORE-RECONCILIATION@1.0.0
+  runtime_release: v2.3.2
+  runtime_commit: cfd68602a4491d61658f564b86d550f4b498f06f
+  rhgd_ref: 29194e935b838dd1c4ee4228b515911c5a0bb8e7
+gates:
+  DELTA_INVENTORY: PASS
+  LEARNING_PRESERVED: PASS
+  PGH_AUTHORIZATION_REQUIRED: PASS
+  RESOURCE_STATE_OWNED_BY_PGD: PASS
+  NO_DUPLICATE_PGD_RUNTIME: PASS
+  OUTCOME_EVIDENCE_OBSERVED_ONLY: PASS
+  FEDERATION_PAYLOAD_SCHEMA: PASS
+contract_example:
+  schema_version: pgd-rhgd-federation/1
+  request:
+    request_id: FED-EXAMPLE-001
+    correlation_id: CORR-EXAMPLE-001
+    authorization_ref: pgh://authorization/example
+    context_envelope:
+      schema_version: pgh.context-envelope/0.1
+      context_ref: pgh://context/example
+      context_tokens: 12000
+      privacy_level: 2
+      required_capabilities: [reasoning, structured-output]
+      expansion_policy: selected-adjacent
+    work_unit:
+      work_id: WU-EXAMPLE-001
+      domain: software-engineering
+      idempotency_key: WU-EXAMPLE-001/rev1
+      expected_output_schema_ref: pgh://schemas/cognitive-result/1
+      requested_lease_seconds: 900
+      deadline: null
+      decomposition:
+        remaining_depth: 2
+        max_nodes: 8
+  runtime_mapping:
+    stable_release: v2.3.2
+    stable_commit: cfd68602a4491d61658f564b86d550f4b498f06f
+    message_schema: pgh-message/1
+    delivery_semantics: at-least-once+idempotency+ack+lease
+    pgd_owns: [admission, queue, lease, scheduler, retry, recovery, runtime_state]
+    rhgd_owns: [capability_discovery, federation_transport, interdomain_provenance]
+  response:
+    status: ADMITTED
+    execution_ref: pgd://execution/example
+    lease_ref: null
+    outcome_evidence_ref: null
+    retryable: false
+    outcome_classification: observed

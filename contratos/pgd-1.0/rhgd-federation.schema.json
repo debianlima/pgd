@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pgh.local/contracts/pgd-1.0/rhgd-federation.schema.json",
+  "title": "PGD RHGD federation-facing contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request", "runtime_mapping", "response"],
+  "properties": {
+    "schema_version": {"const": "pgd-rhgd-federation/1"},
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["request_id", "correlation_id", "authorization_ref", "context_envelope", "work_unit"],
+      "properties": {
+        "request_id": {"type": "string", "minLength": 1},
+        "correlation_id": {"type": "string", "minLength": 1},
+        "authorization_ref": {"type": "string", "minLength": 1},
+        "context_envelope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schema_version", "context_ref", "context_tokens", "privacy_level", "required_capabilities", "expansion_policy"],
+          "properties": {
+            "schema_version": {"type": "string", "pattern": "^pgh\\.context-envelope/"},
+            "context_ref": {"type": "string", "minLength": 1},
+            "context_tokens": {"type": "integer", "minimum": 1},
+            "privacy_level": {"type": "integer", "minimum": 0, "maximum": 4},
+            "required_capabilities": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+            "expansion_policy": {"enum": ["selected", "selected-adjacent", "selected-adjacent-global"]}
+          }
+        },
+        "work_unit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["work_id", "domain", "idempotency_key", "expected_output_schema_ref", "requested_lease_seconds"],
+          "properties": {
+            "work_id": {"type": "string", "minLength": 1},
+            "domain": {"type": "string", "minLength": 1},
+            "idempotency_key": {"type": "string", "minLength": 1},
+            "expected_output_schema_ref": {"type": "string", "minLength": 1},
+            "requested_lease_seconds": {"type": "integer", "minimum": 1},
+            "deadline": {"type": ["string", "null"]},
+            "decomposition": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "remaining_depth": {"type": "integer", "minimum": 0},
+                "max_nodes": {"type": "integer", "minimum": 1}
+              }
+            }
+          }
+        }
+      }
+    },
+    "runtime_mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stable_release", "stable_commit", "message_schema", "delivery_semantics", "pgd_owns", "rhgd_owns"],
+      "properties": {
+        "stable_release": {"const": "v2.3.2"},
+        "stable_commit": {"const": "cfd68602a4491d61658f564b86d550f4b498f06f"},
+        "message_schema": {"const": "pgh-message/1"},
+        "delivery_semantics": {"const": "at-least-once+idempotency+ack+lease"},
+        "pgd_owns": {"const": ["admission", "queue", "lease", "scheduler", "retry", "recovery", "runtime_state"]},
+        "rhgd_owns": {"const": ["capability_discovery", "federation_transport", "interdomain_provenance"]}
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "execution_ref", "retryable", "outcome_classification"],
+      "properties": {
+        "status": {"enum": ["ADMITTED", "QUEUED", "CLAIMED", "RUNNING", "SUCCEEDED", "FAILED", "REJECTED"]},
+        "execution_ref": {"type": "string", "minLength": 1},
+        "lease_ref": {"type": ["string", "null"]},
+        "outcome_evidence_ref": {"type": ["string", "null"]},
+        "retryable": {"type": "boolean"},
+        "outcome_classification": {"const": "observed"}
+      }
+    }
+  }
+}
