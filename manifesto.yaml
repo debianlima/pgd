@@ -15,22 +15,7 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado:
-  projeto: pgd
-  caminho: repositorio-canonico
-  unidade: U-PGD-08-HUMAN-RECONCILIATION-RATIFICATION
-  descricao: ratificacao prospectiva da reconciliacao total e geral sobre o estado
-    PGD/RHGD ja materializado, sem reclassificar autoridade historica
-  agente: ChatGPT-Redes-profile-aline
-  atualizado_em: '2026-09-01T11:08:00-03:00'
-  previsao_termino: '2026-09-01T11:35:00-03:00'
-  zona_exclusao:
-  - manifesto.yaml
-  - estado.md
-  - dados/telemetria-unidades.jsonl
-  - dados/pgd-1.0/U-PGD-08-human-reconciliation-ratification.yaml
-  - docs/U-PGD-08-human-reconciliation-ratification.md
-  - tests/verify_u_pgd_08_human_ratification.py
+trabalho_compartilhado: {}
 entradas:
 - id: 1
   caminho: README.md
@@ -75,7 +60,7 @@ entradas:
   consome:
   - handoff-pgh-u20
   produz: pgd-1.0-release-contract
-  aceite: tests/verify_release_1_0.py
+  aceiite: tests/verify_release_1_0.py
 - id: 11
   caminho: dados/pgd-1.0/U-PGD-02-release-evidence.yaml
   tipo: dados
@@ -178,7 +163,7 @@ entradas:
 - id: 25
   caminho: dados/pgd-1.0/U-PGD-08-human-reconciliation-ratification.yaml
   tipo: dados
-  status: em_curso
+  status: aceito
   consome:
   - HUMAN-RECONCILIATION-TOTAL-GENERAL-20260901
   - pgd-rhgd-federation-contract
@@ -188,7 +173,7 @@ entradas:
 - id: 26
   caminho: docs/U-PGD-08-human-reconciliation-ratification.md
   tipo: documentacao
-  status: em_curso
+  status: aceito
   consome:
   - pgd-human-reconciliation-ratification-evidence
   produz: pgd-human-reconciliation-ratification-human-view
@@ -196,7 +181,7 @@ entradas:
 - id: 27
   caminho: tests/verify_u_pgd_08_human_ratification.py
   tipo: teste
-  status: em_curso
+  status: aceito
   consome:
   - pgd-human-reconciliation-ratification-human-view
   produz: pgd-human-reconciliation-ratification-gate
