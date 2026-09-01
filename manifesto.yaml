@@ -15,7 +15,22 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado: {}
+trabalho_compartilhado:
+  unidade: U-PGD-09-SYSTEMIC-ONTOLOGICAL-TREES
+  agente: ChatGPT-Redes
+  previsao_termino: "2026-09-01T20:58:57Z"
+  zona_exclusao:
+  - manifesto.yaml
+  - estado.md
+  - competencias.yaml
+  - lexico.yaml
+  - skills/pgd/SKILL.md
+  - dados/telemetria-unidades.jsonl
+  - contratos/pgd-1.0/systemic-tree.schema.json
+  - dados/pgd-1.0/U-PGD-09-systemic-ontological-trees.yaml
+  - docs/U-PGD-09-systemic-ontological-trees.md
+  - tests/verify_u_pgd_09_systemic_trees.py
+  descricao: Formalizar ProjectTree, ResourceTree, AuthTree e TaskTree por projeto como DAGs ontologicos sincronizados por WCB, com refs remotas/peer, revisao/hash e navegacao RAG.
 entradas:
 - id: 1
   caminho: README.md

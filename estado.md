@@ -92,3 +92,7 @@
 - A aprovação não cria `context-sync`, `browser-qa`, `simulation` ou identidade de máquina; tampouco autoriza operações destrutivas de árvore, persistência de segredos ou expansão de autoridade entre camadas.
 - `DELTA_INVENTORY=PASS`; `LEARNING_PRESERVED=PASS`; `HUMAN_DECISION_PROVENANCE=PASS`; `TEMPORAL_NON_RETROACTIVITY=PASS`; `CURRENT_STATE_RATIFIED=PASS`; `RELEASE_IMMUTABILITY=PASS`; `AUTHORITY_BOUNDARY=PASS`.
 - `trabalho_compartilhado` liberado; próxima conciliação deve consumir este HEAD e respeitar locks/safe points/capabilities reais.
+
+## U-PGD-09-SYSTEMIC-ONTOLOGICAL-TREES — unidade aberta
+- `telemetria_inicio=2026-09-01T14:58:57Z`; decisão humana: árvores sistêmicas compartilhadas para projetos, recursos, autenticação e tarefas, sincronizadas por WCB e navegáveis via refs RAG.
+- Visualização pode ser hierárquica/A+, mas modelo interno é DAG tipado para representar dependências cruzadas e peers remotos sem duplicação de identidade.
