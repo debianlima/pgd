@@ -1,0 +1,75 @@
+unit: U-PGD-07-CORE-SYSTEM-CONTEXT-RECONCILIATION
+nature: post_release_incremental_reconciliation
+refs:
+  pgd_base: 3f23a2d5a83446e4b7f0ba2abeee4f63dddf738e
+  pgh_main: edbfefa6ef4d0bd2e6581e6781e82e167c583b96
+  pgh_candidate: 78ec019c5ba0f4e72c878aa3c18baea2639a350b
+  runtime: f033b622ce6a3e59f4a3d2d29f903b3f4a267b32
+  system_vision_catalog: c1f208fb3470eeced0fd3da96d948efa196cb38c
+  system_vision_sha256: d35189c2a1e1b1cd8d5ae62c036e752f6c2dfa8495fa00bd0d92204bdee65e7d
+pgh_contract: CT-PGH2-OPERATIONAL-RECONCILIATION@1.0.0
+system_vision_id: PGH-SUITE-SYSTEM-VISION-1
+reconciliation:
+  predecessor_unit: U-PGD-06-CORE-SYSTEM-CONTEXT
+  predecessor_result: BLOCKED_DEPENDENCY
+  predecessor_blocker_removed: true
+  blocker_removal_evidence:
+    pgh_u250_u255_closed: true
+    runtime_u250_closed: true
+    shared_work_released: true
+  delta_inventory:
+  - U250 formalizes operational reconciliation triggers/invariants and delegates runtime assignment/dispatch to PGD
+  - U255 adopts PGH-SUITE-SYSTEM-VISION-1 as non-normative architectural orientation
+  - runtime f033b622 materializes OperationalReconciliationCoordinator and context-sync without second scheduler/broker
+  - current PGH main adds PGDMD as PGA accessory governance protocol; PGD runtime ownership is explicitly preserved
+  learning_preserved:
+  - PGD remains the only owner of scheduler, queues, leases, retry, recovery and live runtime state
+  - PGH authorization/semantics/evidence remain upstream of PGD execution
+  - RHGD federation remains without scheduler/lease ownership
+  - PGA remains policy/authority layer
+  lost_invariants: 0
+authority:
+  PGH: triggers_invariants_semantics_evidence
+  PGD: assignment_dispatch_queues_leases_scheduler_runtime_state
+  PGA: policy_authority_gates
+  RHGD: federation_without_second_scheduler
+  supervisor: transport_preconstructed_orders_without_default_replanning
+context_sync:
+  capability: context-sync
+  runtime: pgh.dynamic-sync
+  semantic_authority: PGH
+  runtime_authority: PGD
+  policy_authority: PGA
+  second_broker_created: false
+  second_scheduler_created: false
+  safe_point_required: true
+  base_revision_fencing_required: true
+operational_reconciliation:
+  component: OperationalReconciliationCoordinator
+  interval_minutes_default: 60
+  scheduler_reuse: RouterStore.scheduler_state
+  assignment_fence_reuse: DynamicSyncCoordinator.task_assignments.assignment_epoch
+  botv2_fence_reuse: command_id+round_id+base_revision
+  no_preemption: true
+  stale_snapshot_dispatch: forbidden
+release:
+  version: 1.0.0
+  tag: v1.0.0
+  tag_commit: 366388d8c52f696d81b7277075b87e8fc144ca1b
+  immutable: true
+  bump_required: false
+core_change_required: 'NO'
+project_skill_change_required: 'NO'
+gates:
+  DELTA_INVENTORY: PASS
+  LEARNING_PRESERVED: PASS
+  UPSTREAM_CORE_SAFE_POINT: PASS
+  U250_OPERATIONAL_RECONCILIATION: PASS
+  U255_SYSTEM_VISION: PASS
+  PGD_RUNTIME_REFERENCE: PASS
+  AUTHORITY_BOUNDARY: PASS
+  CONTEXT_SYNC_BOUNDARY: PASS
+  NO_DUPLICATE_PGD_RUNTIME: PASS
+  RELEASE_IMMUTABILITY: PASS
+  RECONCILIATION_CLOSURE: PASS
+  DEPENDENCY_REFERENCES: PASS

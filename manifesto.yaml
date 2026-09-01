@@ -15,18 +15,7 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado:
-  unidade: U-PGD-07-CORE-SYSTEM-CONTEXT-RECONCILIATION
-  agente: ChatGPT-Redes
-  previsao_termino: "2026-09-01T17:32:42Z"
-  zona_exclusao:
-  - manifesto.yaml
-  - estado.md
-  - dados/telemetria-unidades.jsonl
-  - dados/pgd-1.0/U-PGD-07-core-system-context-reconciliation.yaml
-  - docs/U-PGD-07-core-system-context-reconciliation.md
-  - tests/verify_u_pgd_07_core_system_context.py
-  descricao: Reconciliar PGD pos-release com os safe points finais U250/U255/runtime sem mover v1.0.0 nem criar runtime paralelo.
+trabalho_compartilhado: {}
 entradas:
 - id: 1
   caminho: README.md
@@ -145,6 +134,32 @@ entradas:
   - pgd-rhgd-federation-human-view
   produz: pgd-rhgd-federation-gate
   aceite: tests/verify_u_pgd_05_rhgd_federation.py
+- id: 22
+  caminho: dados/pgd-1.0/U-PGD-07-core-system-context-reconciliation.yaml
+  tipo: dados
+  status: aceito
+  consome:
+  - pgh2-operational-reconciliation-core-contract
+  - pgh-suite-system-vision-1
+  - pgd-runtime-operational-reconciliation
+  produz: pgd-core-system-context-reconciliation-evidence
+  aceite: tests/verify_u_pgd_07_core_system_context.py
+- id: 23
+  caminho: docs/U-PGD-07-core-system-context-reconciliation.md
+  tipo: documentacao
+  status: aceito
+  consome:
+  - pgd-core-system-context-reconciliation-evidence
+  produz: pgd-core-system-context-reconciliation-human-view
+  aceite: tests/verify_u_pgd_07_core_system_context.py
+- id: 24
+  caminho: tests/verify_u_pgd_07_core_system_context.py
+  tipo: teste
+  status: aceito
+  consome:
+  - pgd-core-system-context-reconciliation-human-view
+  produz: pgd-core-system-context-reconciliation-gate
+  aceite: tests/verify_u_pgd_07_core_system_context.py
 auxiliar_construcao_conciliacao:
   habilitado: true
   papel: auxiliar
