@@ -131,3 +131,13 @@
 - ResourceGraph resolve capabilities/competências/skill_refs; versão carregável vem somente da `linha_homologada` do catálogo.
 - `PROVENANCE_FRESHNESS=PASS`; `PEER_FEDERATION=PASS`; `WCB_GRAPH_DELTA=PASS`; `AUTH_NO_SECRETS=PASS`.
 - `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`; `trabalho_compartilhado={}`.
+
+## U-PGD-13-RHGD-CLOSURE-RECONCILIATION — PASS
+- RHGD peer reconciliado em `ee24a3916e964c7ec624b666daa035aa6f4e97c5`; `rhgd-project@0.0.7` registrado no catálogo `07b6f5ef067873f0f6e77896a477184fb9dd53db`.
+- U-PGD-04/U-PGD-05 permanecem byte-históricos nos refs originais; a referência nova entra somente em U-PGD-13.
+- `pgd-rhgd-federation/1` preservado; PGD continua único owner de runtime/scheduler/fila/lease/retry/recovery.
+- `FederatedDestinationMatcher` RHGD é seleção federativa read-only quanto à autoridade operacional; `CognitiveScheduler` é alias legado sem segundo scheduler.
+- `DELTA_INVENTORY=PASS`; `LEARNING_PRESERVED=PASS`; `RHGD_CLOSURE_REF=PASS`; `CATALOG_REF=PASS`; `AUTHORITY_BOUNDARY=PASS`; `NO_DUPLICATE_RUNTIME=PASS`; `RELEASE_IMMUTABILITY=PASS`.
+- `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`.
+- release PGD `v1.0.0` permanece imutável.
+- `telemetria_fim=2026-09-01T18:09:01.239614Z`; `trabalho_compartilhado` liberado.

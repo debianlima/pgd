@@ -1,0 +1,39 @@
+schema: pgd-rhgd-closure-reconciliation/1
+unit: U-PGD-13-RHGD-CLOSURE-RECONCILIATION
+refs:
+  PGD_BASE: 3f7d70e974271a0ee316df9425d5e955225fddd4
+  RHGD_CLOSURE: ee24a3916e964c7ec624b666daa035aa6f4e97c5
+  PGA: c151e58adf05339eee7f762fa0a96b401e4b6985
+  PGH: 304b9914ae44b0ac4240d912bd81f7be87d5a708
+  RUNTIME_SAFE_POINT: 6c3708aeff692c6eac5ce2a39d134afd64f616df
+  CATALOG: 07b6f5ef067873f0f6e77896a477184fb9dd53db
+facts:
+  historical_u04_u05_refs_preserved: true
+  rhgd_peer_gap_closed: true
+  federation_contract: pgd-rhgd-federation/1
+  pgd_runtime_owner: true
+  rhgd_second_scheduler: false
+  rhgd_project_skill: 0.0.7
+  rhgd_canonical_matcher: FederatedDestinationMatcher
+  rhgd_legacy_symbol: CognitiveScheduler
+  rhgd_legacy_symbol_semantics: compatibility_alias_only
+  release_v1_0_0_immutable: true
+preserved_learning:
+- U-PGD-04 and U-PGD-05 keep their original RHGD refs as historical evidence.
+- PGD remains the only owner of admission, queue, lease, scheduler, retry, recovery and live runtime state.
+- RHGD may discover/select a federated destination and transport an authorized WorkUnit, but does not become a second scheduler.
+- RHGD LAT-02 resolves the legacy CognitiveScheduler name by aliasing it to the non-authoritative FederatedDestinationMatcher.
+gates:
+  DELTA_INVENTORY: PASS
+  LEARNING_PRESERVED: PASS
+  RHGD_CLOSURE_REF: PASS
+  PGH_REF: PASS
+  PGA_REF: PASS
+  RUNTIME_SAFE_POINT: PASS
+  CATALOG_REF: PASS
+  HISTORICAL_EVIDENCE_IMMUTABLE: PASS
+  AUTHORITY_BOUNDARY: PASS
+  NO_DUPLICATE_RUNTIME: PASS
+  RELEASE_IMMUTABILITY: PASS
+  RECONCILIATION_CLOSURE: PASS
+  DEPENDENCY_REFERENCES: PASS
