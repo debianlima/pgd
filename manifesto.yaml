@@ -347,6 +347,39 @@ entradas:
   tipo: teste
   status: aceito
   aceite: tests/verify_u_pgd_13_rhgd_closure.py
+- id: 47
+  caminho: contratos/pgd-1.0/incremental-information-exchange.schema.json
+  tipo: contrato
+  status: pendente
+  consome:
+  - pgd-work-context-broadcast-contract
+  - pgd-operational-context-forest-contract
+  produz: pgd-incremental-information-exchange-contract
+  aceite: tests/verify_u_pgd_14_incremental_runtime_information_exchange.py
+- id: 48
+  caminho: dados/pgd-1.0/U-PGD-14-incremental-runtime-information-exchange.yaml
+  tipo: dados
+  status: pendente
+  consome:
+  - pgd-incremental-information-exchange-contract
+  produz: pgd-incremental-information-exchange-evidence
+  aceite: tests/verify_u_pgd_14_incremental_runtime_information_exchange.py
+- id: 49
+  caminho: docs/U-PGD-14-incremental-runtime-information-exchange.md
+  tipo: documentacao
+  status: pendente
+  consome:
+  - pgd-incremental-information-exchange-evidence
+  produz: pgd-incremental-information-exchange-human-view
+  aceite: tests/verify_u_pgd_14_incremental_runtime_information_exchange.py
+- id: 50
+  caminho: tests/verify_u_pgd_14_incremental_runtime_information_exchange.py
+  tipo: teste
+  status: pendente
+  consome:
+  - pgd-incremental-information-exchange-human-view
+  produz: pgd-incremental-information-exchange-gate
+  aceite: tests/verify_u_pgd_14_incremental_runtime_information_exchange.py
 auxiliar_construcao_conciliacao:
   habilitado: true
   papel: auxiliar
