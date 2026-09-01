@@ -1,0 +1,35 @@
+schema: pgd-human-reconciliation-ratification-v1
+unit: U-PGD-08-HUMAN-RECONCILIATION-RATIFICATION
+authority:
+  decision_id: HUMAN-RECONCILIATION-TOTAL-GENERAL-20260901
+  authority: human-operator
+  source: chatgpt-user-direct
+  routerstore_rowid: 4915
+  decision_at: '2026-09-01T05:51:28.063002Z'
+  text: 'A reconciliação está aprovada, total e geral.'
+temporal_provenance:
+  u_pgd_05_commit: abf929598c1eeb50fa09c90c3f039d4bc8bb1f79
+  u_pgd_05_commit_at: '2026-09-01T02:05:51-03:00'
+  historical_authority_reclassified: false
+  ratification_effect: prospective_from_decision_at
+scope:
+  approved:
+    - current_reconciled_pgd_rhgd_state
+    - incremental_reconciliation_and_homologation_when_gates_allow
+  not_created_by_approval: [context-sync, browser-qa, simulation, machine_identity]
+  still_specific: [destructive_tree_changes, secret_persistence, cross_layer_authority_expansion]
+preserved_boundaries:
+  PGD: runtime_scheduler_execution
+  RHGD: federation_discovery_no_second_scheduler
+immutable_blobs:
+  VERSION: 3eefcb9dd5b38e2c1dc061052455dd97bcd51e6c
+  contratos/pgd-1.0/rhgd-federation.schema.json: 9d85ff1c7095917476877d59fd89dc6e63d4d783
+  skills/pgd/SKILL.md: 28a453019c254475380924ff05f70c9e4f096b90
+gates:
+  DELTA_INVENTORY: PASS
+  LEARNING_PRESERVED: PASS
+  HUMAN_DECISION_PROVENANCE: PASS
+  TEMPORAL_NON_RETROACTIVITY: PASS
+  CURRENT_STATE_RATIFIED: PASS
+  RELEASE_IMMUTABILITY: PASS
+  AUTHORITY_BOUNDARY: PASS
