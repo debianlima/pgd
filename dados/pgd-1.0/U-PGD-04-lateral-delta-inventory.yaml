@@ -1,0 +1,139 @@
+schema: pgd-rhgd-lateral-reconciliation-v1
+unit: U-PGD-04-LAT02-RHGD-LATERAL
+pair: LAT-02
+scope:
+  primary: debianlima/pgd
+  peer: debianlima/rhgd
+  core_reference: debianlima/pgh-distributed-session-control-plane
+  core_mode: read_only
+canonical_refs:
+  pgd_base: 366388d8c52f696d81b7277075b87e8fc144ca1b
+  pgd_reservation: 64ab732c59791da9a04116c31b4d0b285873f2d9
+  rhgd: 29194e935b838dd1c4ee4228b515911c5a0bb8e7
+  core: 2df5f0a98f201293fe278c54ea7fd2c483102119
+skills:
+  project: pgd-project@0.1.0
+  method: desenvolvedor-de-software@15
+  reconciliation: github-incremental-reconciliation@7
+  telemetry: telemetry-data-visualization@2
+lateral_delta_inventory:
+  DELTA_INVENTORY: PASS
+  LEARNING_PRESERVED: PASS
+  normalization_allowed: true
+  pgd_release_reopened: false
+  pgd_release_version: 1.0.0
+  pgd_contract_version_changed: false
+  core_modified: false
+  rhgd_modified_by_this_side: false
+  deltas:
+    - id: PGD_REMOTE_AHEAD_OF_OLD_LOCAL_AUDIT_COPY
+      classification: incorporated_remote_history
+      evidence: old audit checkout 47615dbf...; canonical PGD base 366388d8...
+      action: fresh clone from canonical remote; no local copy promoted
+    - id: RHGD_STALE_PGD_BOOTSTRAP_STATEMENT
+      classification: peer_state_stale
+      evidence: rhgd/estado.md still states PGD standalone was not materialized at bootstrap
+      current_truth: PGD standalone exists at debianlima/pgd release 1.0.0; canonical execution implementation remains debianlima/pgh-distributed-session-control-plane by H01-R2
+      action: A02/RHGD should reconcile estado/adapter planning at its own safe point; this PGD-side unit does not edit RHGD
+    - id: PGD_RHGD_FEDERATION_PAYLOAD_SCHEMA_NOT_DECLARED
+      classification: contract_gap
+      evidence: PGD 1.0 release schema proves ownership/release gates, while PGD handoff names runtime/admission/queue/lease/reservation/scheduler semantics but no standalone federation-facing payload schema exists
+      action: before a real RHGD->PGD runtime adapter, create a new deliberate/versioned PGD contract defining payload fields; do not infer fields from implementation
+matrix:
+  - rule: live_runtime_state
+    producer: PGD
+    consumer: RHGD_reference_discovery_only
+    implementation: pgh-distributed-session-control-plane lineage; AgentInstance/ExecutorInstance/WorkSession/live heartbeat-status
+    test: core tests/verify_pgh_2_u33_suite_agent_control.py + PGD tests/verify_release_1_0.py
+    evidence: PGD U-PGD-01 handoff; PGD U-PGD-02 release evidence; Core U33/U36D
+    state: PGD_OWNED_HOMOLOGATED_BOUNDARY
+    gap_action: federation-facing live-runtime payload schema not declared; new versioned contract required before adapter
+  - rule: operational_admission
+    producer: PGD
+    consumer: RHGD_submits_or_federates_authorized_work_reference
+    implementation: suite command path PGH-semantic-authorization -> PGD-operational-admission -> PGD-execution
+    test: core tests/verify_pgh_2_u33_suite_agent_control.py
+    evidence: core suite-agent-control-boundary.schema.json; U33 suite control boundary
+    state: PGD_OWNED_HOMOLOGATED_BOUNDARY
+    gap_action: admission request/response payload schema for RHGD not declared
+  - rule: task_queue_dag
+    producer: PGD
+    consumer: RHGD_must_not_own_queue
+    implementation: PGD scheduler/TaskQueue/DAG runtime lineage
+    test: core tests/verify_pgh_2_u33_suite_agent_control.py + PGD release gate RESOURCE_STATE_OWNED_BY_PGD
+    evidence: PGD handoff; RHGD architecture boundary explicitly forbids duplicate scheduler/queue
+    state: PGD_OWNED_HOMOLOGATED_BOUNDARY
+    gap_action: RHGD may transport a work reference only after a versioned PGD interface exists
+  - rule: lease_and_reservation
+    producer: PGD
+    consumer: RHGD_reference_only_no_mint
+    implementation: ResourceLease/ReservationToken/admission barrier are PGD-owned
+    test: PGD release gates NO_RUNTIME_LEASE_IN_PGH + RESOURCE_STATE_OWNED_BY_PGD; core U33 gate
+    evidence: PGD handoff U33 section; core U33/U37
+    state: PGD_OWNED_HOMOLOGATED_BOUNDARY
+    gap_action: token/reference serialization for federation not declared; RHGD must not mint lease/reservation
+  - rule: scheduler_execution
+    producer: PGD
+    consumer: RHGD_federates_not_schedules
+    implementation: canonical execution lineage debianlima/pgh-distributed-session-control-plane
+    test: core U33/U36D gates; PGD identity gate PGD_IDENTITY_H01_R2=PASS
+    evidence: PGD estado.md H01-R2; RHGD boundary rule PGA governs; PGH authorizes/contextualizes; PGD schedules/executes; RHGD federates
+    state: PGD_OWNED_HOMOLOGATED_BOUNDARY
+    gap_action: none for ownership; real federation adapter waits on versioned interface contract
+  - rule: outcome_evidence
+    producer: PGD
+    consumer: PGH_primary; RHGD_may_transport_preserving_provenance
+    implementation: OutcomeEvidenceEnvelope with execution_state/effect_state; knowledge_candidate_status observed
+    test: PGD release gates OUTCOME_EVIDENCE_OBSERVED_ONLY + EFFECT_VERIFICATION_NE_PROCESS_EXIT
+    evidence: core contratos/pgh-2.0/outcome-evidence-envelope.schema.json; PGD U-PGD-01/U-PGD-02
+    state: SCHEMA_EXISTS_AND_BOUNDARY_HOMOLOGATED
+    gap_action: RHGD transport wrapper, if needed, must reference rather than redefine OutcomeEvidenceEnvelope
+  - rule: external_capability_discovery
+    producer: RHGD
+    consumer: PGD_admission_and_PGH_context_as_contracts_define
+    implementation: RHGD Phase-0 discovery is candidate only; KnownResourceDescriptor remains descriptive and contains no live queue/lease/runtime state
+    test: core known-resource-descriptor schema excludes live state fields; RHGD boundary tests stay separate
+    evidence: core U37 suite resource reconciliation; RHGD architecture boundary
+    state: CANDIDATE_FEDERATION_SEAM
+    gap_action: A02/RHGD must define adapter against versioned PGD interface without copying scheduler/lease logic
+context_exchange:
+  source_project: pgd
+  source_unit: U-PGD-04-LAT02-RHGD-LATERAL
+  peer_project: rhgd
+  peer_ref: 29194e935b838dd1c4ee4228b515911c5a0bb8e7
+  messages:
+    - target: A02/RHGD
+      relation: lateral_pair_peer
+      summary: PGD 1.0.0 exists and owns live runtime/admission/queue/lease/reservation/scheduler; RHGD estado bootstrap statement is stale. Reconcile RHGD at own safe point; do not implement a second scheduler.
+    - target: A09/MSGCD
+      relation: handoff
+      summary: Expose suite view as PGD-owned operational state plus RHGD federation/discovery. MSGCD aggregates; it does not gain authority or runtime ownership.
+    - target: external_PGH2_core_agent
+      relation: read_only_reference
+      summary: Core 2df5f0a... used only as canonical read evidence; no Core normalization/write by LAT-02.
+gates_result:
+  PGD_PROJECT_VERIFY: PASS
+  PGD_RELEASE_1_0: PASS_9_OF_9
+  RHGD_PROJECT_VERIFY: PASS
+  RHGD_UNITTESTS: PASS_8_OF_8
+  PGD_OWNS_RUNTIME: PASS
+  PGD_OWNS_ADMISSION: PASS
+  PGD_OWNS_QUEUE_LEASE_RESERVATION: PASS
+  PGD_OWNS_SCHEDULER_EXECUTION: PASS
+  OUTCOME_EVIDENCE_BOUNDARY: PASS
+  RHGD_NO_DUPLICATE_SCHEDULER: PASS
+  CORE_READ_ONLY: PASS
+  FEDERATION_PAYLOAD_SCHEMA: GAP_NEW_VERSIONED_CONTRACT_REQUIRED
+handoff:
+  target: A09/MSGCD
+  status: READY_WITH_DECLARED_GAP
+  do:
+    - render PGD live runtime/admission/queue/lease/reservation/scheduler as PGD-owned operational data
+    - render RHGD as federation/discovery edge only
+    - preserve PGH semantic authorization and PGA policy authority
+    - preserve OutcomeEvidenceEnvelope provenance
+  do_not:
+    - make RHGD a scheduler
+    - let RHGD mint ResourceLease or ReservationToken
+    - let MSGCD gain independent authority
+    - infer federation payload fields before a new versioned PGD contract exists

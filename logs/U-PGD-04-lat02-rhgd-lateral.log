@@ -1,0 +1,20 @@
+telemetria_inicio=2026-09-01T04:22:36Z
+unit=U-PGD-04-LAT02-RHGD-LATERAL
+mode=lateral-reconciliation-no-core-write
+pgd_base=366388d8c52f696d81b7277075b87e8fc144ca1b
+reservation_commit=64ab732c59791da9a04116c31b4d0b285873f2d9
+rhgd_ref=29194e935b838dd1c4ee4228b515911c5a0bb8e7
+core_readonly_ref=2df5f0a98f201293fe278c54ea7fd2c483102119
+project_skill=pgd-project@0.1.0
+method_skill=desenvolvedor-de-software@15 blob=18c1f9df9589a3f757b864e75392d2472aaecb97
+reconciliation_skill=github-incremental-reconciliation@7 blob=4cf2e5f3d1671321aa0dfedd3403d4448cc8e091
+telemetry_macro=telemetry-data-visualization@2
+DELTA_INVENTORY=PASS
+LEARNING_PRESERVED=PASS
+core_write=NO
+rhgd_write=NO
+gates_final=PGD_PROJECT_VERIFY:PASS,PGD_RELEASE_1_0:PASS_9_OF_9,PGD_RHGD_LAT02:PASS
+RECONCILIATION_CLOSURE=PASS
+DEPENDENCY_REFERENCES=PASS
+handoff=A09_MSGCD:READY_WITH_DECLARED_GAP,A02_RHGD:PEER_RECONCILIATION_REQUIRED
+telemetria_fim=2026-09-01T04:24:53Z
