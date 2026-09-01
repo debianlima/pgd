@@ -122,3 +122,6 @@
 - Visões locais preservam base compartilhada; índice privado é derivado/não autoritativo e exige rebase quando a base muda.
 - TaskTree indexa agente, recursos, dependências, fila/reserva/lease e refs de autoridade; mudança recalcula somente ramo afetado.
 - `PGH_HRAG_RAG_PROJECTION=PASS`; `AUTH_NO_SECRETS=PASS`; `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`; `trabalho_compartilhado={}`.
+
+## U-PGD-12-OPERATIONAL-CONTEXT-FOREST — unidade aberta
+- `telemetria_inicio=2026-09-01T15:25:35Z`; decisão humana: implementar com prioridade total a floresta ontológica distribuída completa sobre U09/U10/U11.
