@@ -15,22 +15,7 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado:
-  projeto: pgd
-  caminho: repositorio-canonico
-  unidade: U-PGD-06-CORE-SYSTEM-CONTEXT
-  descricao: PGD reconcilia Core U45/U46 e PGH-SUITE-SYSTEM-VISION-1 sem alterar release/runtime
-  agente: ChatGPT-Redes-profile-aline
-  atualizado_em: '2026-09-01T05:32:41.101521+00:00'
-  previsao_termino: '2026-09-01T07:32:41.101521+00:00'
-  zona_exclusao:
-  - manifesto.yaml
-  - estado.md
-  - dados/telemetria-unidades.jsonl
-  - dados/pgd-1.0/U-PGD-06-core-system-context.yaml
-  - docs/U-PGD-06-core-system-context-reconciliation.md
-  - tests/verify_u_pgd_06_core_system_context.py
-
+trabalho_compartilhado: {}
 entradas:
 - id: 1
   caminho: README.md
