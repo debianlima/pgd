@@ -125,3 +125,9 @@
 
 ## U-PGD-12-OPERATIONAL-CONTEXT-FOREST — unidade aberta
 - `telemetria_inicio=2026-09-01T15:25:35Z`; decisão humana: implementar com prioridade total a floresta ontológica distribuída completa sobre U09/U10/U11.
+
+## U-PGD-12-OPERATIONAL-CONTEXT-FOREST — PASS
+- `SystemNavigatorGraph` + 11 grafos especializados homologados; `GRAPH_COVERAGE=PASS`; `BACKLINKS=PASS`.
+- ResourceGraph resolve capabilities/competências/skill_refs; versão carregável vem somente da `linha_homologada` do catálogo.
+- `PROVENANCE_FRESHNESS=PASS`; `PEER_FEDERATION=PASS`; `WCB_GRAPH_DELTA=PASS`; `AUTH_NO_SECRETS=PASS`.
+- `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`; `trabalho_compartilhado={}`.

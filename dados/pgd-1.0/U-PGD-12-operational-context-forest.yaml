@@ -1,0 +1,138 @@
+unit: U-PGD-12-OPERATIONAL-CONTEXT-FOREST
+nature: post_release_operational_context_contract
+contract_version: pgd-operational-context-forest/1
+depends_on:
+- U-PGD-09-SYSTEMIC-ONTOLOGICAL-TREES
+- U-PGD-10-WORK-CONTEXT-BROADCAST-NORMATIVE
+- U-PGD-11-DYNAMIC-SYSTEMIC-VIEWS
+project_skill_change_required: NO_IMMUTABLE_U08
+graphs:
+  SYSTEM_NAVIGATOR:
+    canonical_name: SystemNavigatorGraph
+    root: true
+    intent_to_graph_routing: true
+    global_scan_default: false
+  PROJECT:
+    canonical_name: ProjectGraph
+    indexes: [project, status, owner, dependencies, task_graph_ref, resource_graph_ref, authority_ref]
+  TASK:
+    canonical_name: TaskGraph
+    per_project: true
+    indexes: [dependencies, allocated_agents, linked_resources, required_capabilities, competency_refs, queue_refs, reservation_refs, lease_refs, status]
+    ready_frontier: true
+    affected_branch_recompute_only: true
+  RESOURCE:
+    canonical_name: ResourceGraph
+    indexes: [resource, machine, location, queue, reservation, lease, project_ref, task_ref, capability_refs, competency_refs, skill_refs, peer_ref]
+    competency_binding:
+      resource_to_capability: true
+      capability_to_competency_ref: true
+      competency_to_skill_ref: true
+      load_associated_competencies_on_resource_open: true
+      skill_version_resolved_from_catalog: true
+  AUTHORIZATION:
+    canonical_name: IdentityAuthorizationGraph
+    indexes: [identity_ref, role_ref, capability_ref, grant_ref, scope, authority_ref, validity_ref, credential_ref, resolver_ref]
+    secret_material: false
+    credential_ref_only: true
+    resolver_ref_required: true
+  CAPABILITY_ROUTING:
+    canonical_name: CapabilityRoutingGraph
+    route: task_or_requirement_to_capability_to_competency_to_agent_or_resource
+    resource_load_resolves_associated_competencies: true
+    skill_authority: catalog_linha_homologada_only
+    resource_inventory_is_skill_authority: false
+    indexes: [capability, competency_ref, skill_ref, agent_ref, resource_ref, availability, project_ref]
+  KNOWLEDGE:
+    canonical_name: KnowledgeGraph
+    indexes: [contract, documentation, evidence, skill_ref, ontology_ref, hrag_ref, rag_ref, bplus_ref, artifact_ref]
+    discovery_only: true
+    authority_from_canonical_refs: true
+  ARTIFACT:
+    canonical_name: ArtifactGraph
+    indexes: [repository, commit, branch, tag, schema, database_ref, file_ref, produced_by_task, consumed_by_task]
+  STATE_HEALTH:
+    canonical_name: StateHealthGraph
+    indexes: [component_ref, health, heartbeat, queue_depth, lag, lease_ref, reservation_ref, observed_revision]
+    operational_projection_only: true
+  COMMUNICATION:
+    canonical_name: CommunicationGraph
+    indexes: [chat_ref, agent_ref, supervisor_ref, project_ref, task_ref, wcb_watermark, sync_epoch]
+    target_selection: affected_relations_then_global_fallback
+  PROVENANCE_FRESHNESS:
+    canonical_name: ProvenanceFreshnessGraph
+    required_fields: [source_ref, revision, content_hash, observed_at, authority_ref]
+    optional_fields: [valid_until, lease_ref, dependency_revisions]
+    stale_must_sync_before_mutation: true
+  PEER_FEDERATION:
+    canonical_name: PeerFederationGraph
+    indexes: [peer_ref, graph_kinds, graph_revision, content_hash, capability_refs, query_ref, authority_ref, valid_until]
+    full_replication_default: false
+    fetch_impacted_branch_only: true
+edge_policy:
+  typed_edges_only: true
+  backlinks_required: true
+  predicates: [HAS_TASK, DEPENDS_ON, HAS_RESOURCE, ASSIGNED_TO, PROVIDES_CAPABILITY, REQUIRES_CAPABILITY, ASSOCIATED_COMPETENCY, REFERENCES_SKILL, REFERENCES_KNOWLEDGE, PRODUCED_ARTIFACT, CONSUMES_ARTIFACT, AUTHORIZED_BY, HEALTH_OF, COMMUNICATES_WITH, DERIVED_FROM, PEER_REF]
+  evidence_required: true
+  anti_cycle_required_where_hierarchical: true
+synchronization:
+  protocol: pgh-work-context-broadcast/1
+  payload: GraphDelta+graph_revision+content_hash+refs
+  every_effective_mutation: update_impacted_graphs_then_emit_WCB
+  self_origin: true
+  compare_revision_and_hash_before_apply: true
+  stale_branch: refetch_impacted_branch
+  private_index: invalidate_or_rebase
+  no_change: audit_without_fanout
+retrieval:
+  default_path: SystemNavigatorGraph_to_macro_graph_to_node_to_canonical_refs_to_HRAG_RAG_if_needed
+  repeat_root_instruction: true
+  root_instruction: >-
+    Esta é a Operational Context Forest compartilhada e versionada. Comece pelo SystemNavigatorGraph,
+    navegue somente o ramo necessário, confirme revision/hash/proveniência antes de agir, resolva skills
+    exclusivamente pela linha_homologada do catálogo, use HRAG/RAG para descoberta/contexto e sincronize
+    via WCB quando stale.
+security:
+  secret_in_graph: false
+  secret_in_broadcast: false
+  authorization_values: refs_only
+  secure_resolver_required: true
+example_forest:
+  schema_version: pgd-operational-context-forest/1
+  forest_id: forest://pgh-suite/operational
+  revision: 1
+  content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  navigator_ref: graph://system-navigator/global
+  graph_refs:
+    SYSTEM_NAVIGATOR: {graph_ref: graph://system-navigator/global, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: pgd://authority/operational-context, source_ref: pgd://store/systemic-graphs}
+    PROJECT: {graph_ref: graph://project/global, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: pgd://authority/projects, source_ref: pgd://store/projects}
+    TASK: {graph_ref: graph://task/pgd, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: pgd://authority/tasks, source_ref: pgd://store/tasks}
+    RESOURCE: {graph_ref: graph://resource/global, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: pgd://authority/resources, source_ref: pgd://store/resources}
+    AUTHORIZATION: {graph_ref: graph://authorization/global, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: pga://authority/grants, source_ref: pga://store/authority}
+    CAPABILITY_ROUTING: {graph_ref: graph://capability-routing/global, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: pgd://authority/routing, source_ref: pgd://store/capabilities}
+    KNOWLEDGE: {graph_ref: graph://knowledge/global, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: pgh://authority/knowledge, source_ref: pgh://store/knowledge}
+    ARTIFACT: {graph_ref: graph://artifact/global, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: pgd://authority/artifacts, source_ref: pgd://store/artifacts}
+    STATE_HEALTH: {graph_ref: graph://state-health/global, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: pgd://authority/runtime-observation, source_ref: pgd://store/runtime-state}
+    COMMUNICATION: {graph_ref: graph://communication/global, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: pgd://authority/communications, source_ref: pgd://store/messages}
+    PROVENANCE_FRESHNESS: {graph_ref: graph://provenance-freshness/global, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: pgh://authority/evidence, source_ref: pgh://store/evidence}
+    PEER_FEDERATION: {graph_ref: graph://peer-federation/global, revision: 1, content_hash: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, authority_ref: rhgd://authority/federation, source_ref: rhgd://store/peers}
+  root_instruction: Esta é uma visão sistêmica compartilhada; confirme revisão/hash e refs canônicas antes de agir.
+  last_wcb_epoch: 0
+  generated_at: '2026-09-01T15:30:00Z'
+gates:
+  DELTA_INVENTORY: PASS
+  LEARNING_PRESERVED: PASS
+  SYSTEM_NAVIGATOR: PASS
+  GRAPH_COVERAGE: PASS
+  RESOURCE_COMPETENCY_LINKS: PASS
+  CAPABILITY_ROUTING: PASS
+  KNOWLEDGE_ROUTING: PASS
+  PROVENANCE_FRESHNESS: PASS
+  PEER_FEDERATION: PASS
+  BACKLINKS: PASS
+  WCB_GRAPH_DELTA: PASS
+  AUTH_NO_SECRETS: PASS
+  CATALOG_SKILL_AUTHORITY: PASS
+  RELEASE_IMMUTABILITY: PASS
+  RECONCILIATION_CLOSURE: PASS
+  DEPENDENCY_REFERENCES: PASS

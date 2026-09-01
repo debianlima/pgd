@@ -15,19 +15,7 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado:
-  unidade: U-PGD-12-OPERATIONAL-CONTEXT-FOREST
-  agente: ChatGPT-Redes
-  previsao_termino: "2026-09-01T19:25:35Z"
-  zona_exclusao:
-  - manifesto.yaml
-  - estado.md
-  - dados/telemetria-unidades.jsonl
-  - contratos/pgd-1.0/operational-context-forest.schema.json
-  - dados/pgd-1.0/U-PGD-12-operational-context-forest.yaml
-  - docs/U-PGD-12-operational-context-forest.md
-  - tests/verify_u_pgd_12_operational_context_forest.py
-  descricao: "Formalizar a Operational Context Forest aprovada: raiz SystemNavigator e grafos de projeto, tarefa, recurso, autorizacao, capability, conhecimento, artefato, saude, comunicacao, proveniencia/freshness e peers, sincronizados por WCB."
+trabalho_compartilhado: {}
 entradas:
 - id: 1
   caminho: README.md
@@ -297,6 +285,40 @@ entradas:
   - pgd-dynamic-systemic-view-human-view
   produz: pgd-dynamic-systemic-view-gate
   aceite: tests/verify_u_pgd_11_dynamic_systemic_views.py
+- id: 40
+  caminho: contratos/pgd-1.0/operational-context-forest.schema.json
+  tipo: contrato
+  status: aceito
+  consome:
+  - pgd-systemic-tree-contract
+  - pgd-work-context-broadcast-contract
+  - pgd-systemic-view-sync-contract
+  produz: pgd-operational-context-forest-contract
+  aceite: tests/verify_u_pgd_12_operational_context_forest.py
+- id: 41
+  caminho: dados/pgd-1.0/U-PGD-12-operational-context-forest.yaml
+  tipo: dados
+  status: aceito
+  consome:
+  - pgd-operational-context-forest-contract
+  produz: pgd-operational-context-forest-evidence
+  aceite: tests/verify_u_pgd_12_operational_context_forest.py
+- id: 42
+  caminho: docs/U-PGD-12-operational-context-forest.md
+  tipo: documentacao
+  status: aceito
+  consome:
+  - pgd-operational-context-forest-evidence
+  produz: pgd-operational-context-forest-human-view
+  aceite: tests/verify_u_pgd_12_operational_context_forest.py
+- id: 43
+  caminho: tests/verify_u_pgd_12_operational_context_forest.py
+  tipo: teste
+  status: aceito
+  consome:
+  - pgd-operational-context-forest-human-view
+  produz: pgd-operational-context-forest-gate
+  aceite: tests/verify_u_pgd_12_operational_context_forest.py
 auxiliar_construcao_conciliacao:
   habilitado: true
   papel: auxiliar
