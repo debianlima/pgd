@@ -82,3 +82,13 @@
 - `PGD_CORE_SYSTEM_CONTEXT_U07=PASS`; `AUTHORITY_BOUNDARY=PASS`; `CONTEXT_SYNC_BOUNDARY=PASS`; `NO_DUPLICATE_PGD_RUNTIME=PASS`.
 - `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`; `RELEASE_IMMUTABILITY=PASS`; `VERSION=1.0.0` e tag `v1.0.0` preservadas.
 - `trabalho_compartilhado` liberado; próxima dependência habilitada: reconciliação sucessora da PGA contra este HEAD PGD.
+
+
+## U-PGD-08-HUMAN-RECONCILIATION-RATIFICATION — PASS
+- Decisão humana direta: `HUMAN-RECONCILIATION-TOTAL-GENERAL-20260901`, RouterStore `rowid=4915`, `decision_at=2026-09-01T05:51:28.063002Z`: “A reconciliação está aprovada, total e geral.”
+- Efeito: ratificação **prospectiva** do estado reconciliado atual; `historical_authority_reclassified=false`. U-PGD-05 (`abf929598c1eeb50fa09c90c3f039d4bc8bb1f79`) antecede a decisão e não foi reescrita/reclassificada.
+- `pgd-rhgd-federation/1` permanece homologado: PGD possui runtime/scheduler/execution; RHGD federa/descobre sem segundo scheduler.
+- U-PGD-07 Core/System Context permanece PASS e imutável nesta unidade.
+- A aprovação não cria `context-sync`, `browser-qa`, `simulation` ou identidade de máquina; tampouco autoriza operações destrutivas de árvore, persistência de segredos ou expansão de autoridade entre camadas.
+- `DELTA_INVENTORY=PASS`; `LEARNING_PRESERVED=PASS`; `HUMAN_DECISION_PROVENANCE=PASS`; `TEMPORAL_NON_RETROACTIVITY=PASS`; `CURRENT_STATE_RATIFIED=PASS`; `RELEASE_IMMUTABILITY=PASS`; `AUTHORITY_BOUNDARY=PASS`.
+- `trabalho_compartilhado` liberado; próxima conciliação deve consumir este HEAD e respeitar locks/safe points/capabilities reais.
