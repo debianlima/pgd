@@ -15,7 +15,22 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado: {}
+trabalho_compartilhado:
+  projeto: pgd
+  caminho: repositorio-canonico
+  unidade: U-PGD-04-LAT02-RHGD-LATERAL
+  descricao: 'conciliacao lateral PGD↔RHGD: ownership runtime/admission/queue/lease/reservation/scheduler/evidencia
+    sem duplicar Core'
+  agente: ChatGPT-Redes-profile-aline
+  atualizado_em: '2026-09-01T01:29:00-03:00'
+  previsao_termino: '2026-09-01T02:05:00-03:00'
+  zona_exclusao:
+  - manifesto.yaml
+  - estado.md
+  - docs/U-PGD-04-lat02-rhgd-lateral-reconciliation.md
+  - dados/pgd-1.0/U-PGD-04-lateral-delta-inventory.yaml
+  - tests/verify_u_pgd_04_rhgd_lateral.py
+  - logs/U-PGD-04-lat02-rhgd-lateral.log
 entradas:
 - id: 1
   caminho: README.md
@@ -85,6 +100,22 @@ entradas:
   - pgd-1.0-release-human-view
   produz: pgd-1.0-release-gate
   aceite: tests/verify_release_1_0.py
+- id: 14
+  caminho: docs/U-PGD-04-lat02-rhgd-lateral-reconciliation.md
+  tipo: linhagem
+  status: em_curso
+- id: 15
+  caminho: dados/pgd-1.0/U-PGD-04-lateral-delta-inventory.yaml
+  tipo: dados
+  status: em_curso
+- id: 16
+  caminho: tests/verify_u_pgd_04_rhgd_lateral.py
+  tipo: teste
+  status: em_curso
+- id: 17
+  caminho: logs/U-PGD-04-lat02-rhgd-lateral.log
+  tipo: log
+  status: em_curso
 auxiliar_construcao_conciliacao:
   habilitado: true
   papel: auxiliar
