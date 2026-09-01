@@ -71,3 +71,7 @@
 - Resultado desta unidade: `BLOCKED_DEPENDENCY`; nenhuma normalização, bump de release, mudança de autoridade, tag ou runtime foi executada.
 - Reserva liberada para não manter exclusão inútil.
 - Próximo gate: safe point final U250/U255 + U250 runtime; então abrir unidade sucessora com refs finais e rerodar os gates.
+
+## U-PGD-07-CORE-SYSTEM-CONTEXT-RECONCILIATION — unidade sucessora aberta
+- `telemetria_inicio=2026-09-01T13:32:42Z`; a dependência U250/U255/runtime que bloqueou U-PGD-06 foi encerrada em safe point final.
+- Escopo: reconciliar somente refs/ownership/evidência PGD; `VERSION=1.0.0` e tag `v1.0.0` permanecem imutáveis; nenhum runtime paralelo será criado.
