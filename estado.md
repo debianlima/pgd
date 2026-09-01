@@ -103,3 +103,6 @@
 - AuthTree contém somente bindings/escopos/refs; `AUTH_NO_SECRETS=PASS`.
 - Todo nó possui refs RAG/termos; ritual obrigatório: comparar revisão com WCB antes de decidir, atualizar ramo afetado e emitir delta WCB após mutação.
 - `pgd-project@0.2.0` preservada por `U-PGD-08 immutable_blobs`; o ritual repetitivo vive no contrato/raiz das árvores e será injetado pelo runtime. `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`; `trabalho_compartilhado={}`; `v1.0.0` permanece imutável.
+
+## U-PGD-10-WORK-CONTEXT-BROADCAST-NORMATIVE — unidade aberta
+- `telemetria_inicio=2026-09-01T15:05:37Z`; objetivo: homologar no PGD o contrato WCB runtime `f5047f72914c6634982df30c8ce0f8747af5cfb3` sem duplicar runtime.

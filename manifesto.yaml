@@ -15,7 +15,19 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado: {}
+trabalho_compartilhado:
+  unidade: U-PGD-10-WORK-CONTEXT-BROADCAST-NORMATIVE
+  agente: ChatGPT-Redes
+  previsao_termino: "2026-09-01T19:05:37Z"
+  zona_exclusao:
+  - manifesto.yaml
+  - estado.md
+  - dados/telemetria-unidades.jsonl
+  - contratos/pgd-1.0/work-context-broadcast.schema.json
+  - dados/pgd-1.0/U-PGD-10-work-context-broadcast-normative.yaml
+  - docs/U-PGD-10-work-context-broadcast-normative.md
+  - tests/verify_u_pgd_10_work_context_broadcast.py
+  descricao: Homologar no PGD o contrato normativo do Work Context Broadcast ja fechado no runtime U252, sem runtime paralelo nem alteracao da skill historica.
 entradas:
 - id: 1
   caminho: README.md
