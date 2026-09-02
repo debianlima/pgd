@@ -30,6 +30,7 @@ trabalho_compartilhado:
   - dados/pgd-1.0/U-PGD-15-rhgd-closed-safe-point-refresh.yaml
   - docs/U-PGD-15-rhgd-closed-safe-point-refresh.md
   - tests/verify_u_pgd_15_rhgd_closed_safe_point_refresh.py
+  - tests/verify_project.py
 entradas:
 - id: 1
   caminho: README.md
