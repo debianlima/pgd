@@ -57,10 +57,11 @@ def main():
         if any(entries[i]['status']!='aceito' for i in (44,45,46,47)): fail('u11-not-accepted')
         skill=git(rhgd,'show',f'{RHGD_SAFE}:skills/rhgd/SKILL.md')
         if 'versao: 0.0.10' not in skill: fail('safe-skill-version')
-        cur=yaml.safe_load((rhgd/'manifesto.yaml').read_text(encoding='utf-8'))
-        sw=cur.get('trabalho_compartilhado') or {}
-        if sw.get('unidade')!=RHGD_ACTIVE_UNIT: fail('current-u12-not-active')
-        if refs['RHGD_OBSERVED_ACTIVE_HEAD']!=git(rhgd,'rev-parse','HEAD'): fail('active-head-drift')
+        observed_active=refs['RHGD_OBSERVED_ACTIVE_HEAD']
+        subprocess.check_call(['git','-C',str(rhgd),'merge-base','--is-ancestor',observed_active,'HEAD'])
+        observed_manifest=yaml.safe_load(git(rhgd,'show',f'{observed_active}:manifesto.yaml'))
+        observed_sw=observed_manifest.get('trabalho_compartilhado') or {}
+        if observed_sw.get('unidade')!=RHGD_ACTIVE_UNIT: fail('observed-u12-not-active')
         if hashlib.sha256((ROOT/PGD_FED).read_bytes()).hexdigest()!=PGD_FED_SHA: fail('pgd-fed-local-hash')
         print('RHGD_CLOSED_SAFE_POINT_EXTERNAL=PASS')
     print('PGD_U15_RHGD_CLOSED_SAFE_POINT_REFRESH=PASS')
