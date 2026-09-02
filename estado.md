@@ -156,3 +156,16 @@
 - `DELTA_INVENTORY=PASS`; `LEARNING_PRESERVED=PASS`; `NON_BLOCKING_DEFAULT=PASS`; `REQUEST_RESPONSE_CORRELATION=PASS`; `SAME_ZONE=PASS`; `HETEROGENEOUS_ZONE=PASS`; `NO_PREEMPTION=PASS`; `EVIDENCE_NOT_AUTHORITY=PASS`; `INCREMENTAL_RECONCILIATION=PASS`; `NO_SECOND_RUNTIME=PASS`; `RECONCILIATION_CLOSURE=PASS`; `DEPENDENCY_REFERENCES=PASS`.
 - release `v1.0.0` e `pgd-project@0.2.0` preservados; `trabalho_compartilhado={}`.
 - `telemetria_fim=2026-09-01T22:51:48Z`; resultado=`PASS`; próximo consumidor: PGH cognitivo + runtime/control-plane quando materializar suporte explícito de request/response.
+
+## U-PGD-15-RHGD-CLOSED-SAFE-POINT-REFRESH — PASS
+- contrato estrutural PGD avançado para `versao_contrato=4`; release `v1.0.0` e `estado_release=triad_ready` preservados.
+- último safe point RHGD consumido: U-RHGD-11 `c74daa217f307b1fb8d78e10fe5218d8e496dbd8`, `rhgd-project@0.0.10`, contrato RHGD v4, com `trabalho_compartilhado={}` no commit observado.
+- RHGD U12 observada em `397e03821954ebeb88780b6658efec95ecb095b7` sob owner ativo; `RHGD_U12_ACTIVE_NOT_CONSUMED=PASS`. A prova reconstrói esse estado pelo commit observado e não depende do HEAD corrente futuro.
+- `pgd-rhgd-federation/1` permaneceu byte-idêntico (`sha256=3135f6cee8de163d55c9782b1b1de300359a0e2936f79f2a243a03941fefdc52`); `execution_ref` continua provider PGD para transporte RHGD posterior.
+- fronteira preservada: PGD possui runtime/scheduler/execution; RHGD possui discovery/federação/transporte e não cria assignment, lease ou segundo scheduler.
+- `DELTA_INVENTORY=PASS`; `LEARNING_PRESERVED=PASS`; `RHGD_SAFE_POINT_CLOSED=PASS`; `RHGD_SAFE_POINT_ANCESTOR=PASS`; `PGD_FEDERATION_CONTRACT_IDENTITY=PASS`; `NO_DUPLICATE_RUNTIME=PASS`; `HISTORICAL_EVIDENCE_IMMUTABLE=PASS`; `RELEASE_IMMUTABILITY=PASS`; `FUNCTIONAL_PGD_CHANGE_REQUIRED=NO`.
+- regressão: U-PGD-13 PASS; U-PGD-14 PASS; `PGD_RELEASE_1_0=PASS`; `PGD_PROJECT_VERIFY=PASS`.
+- gates estruturais `verify_project.py` e `verify_release_1_0.py` deixaram de congelar `versao_contrato==3` e agora exigem versão inteira monotônica `>=3`, preservando invariantes de release/identidade.
+- `pgd-project@0.2.0` não foi alterada: não surgiu novo aprendizado funcional PGD; houve reconciliação de referência externa e correção mecânica de gates estruturais.
+- pendência externa: U-RHGD-12 continua em curso e só poderá ser consumida por nova unidade PGD depois de fechar o próprio safe point.
+- `trabalho_compartilhado` PGD liberado no commit de fechamento.
