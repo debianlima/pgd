@@ -1,6 +1,6 @@
 projeto: pgd
 nome: Protocolo de Gestao Distribuida
-versao_contrato: 3
+versao_contrato: 4
 release_alvo: v1.0.0
 estado_release: triad_ready
 repositorio: debianlima/pgd
@@ -15,7 +15,21 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado: {}
+trabalho_compartilhado:
+  projeto: pgd
+  caminho: /srv/mcp-workspace/tmp/rhgd-protocol-reconcile-20260902/pgd
+  unidade: U-PGD-15-RHGD-CLOSED-SAFE-POINT-REFRESH
+  descricao: reconciliar PGD com ultimo safe point RHGD fechado U11 sem consumir U12
+    ativa nem alterar runtime/release
+  agente: ChatGPT-Redes
+  atualizado_em: '2026-09-02T04:58:30Z'
+  previsao_termino: '2026-09-02T05:45:00Z'
+  zona_exclusao:
+  - manifesto.yaml
+  - estado.md
+  - dados/pgd-1.0/U-PGD-15-rhgd-closed-safe-point-refresh.yaml
+  - docs/U-PGD-15-rhgd-closed-safe-point-refresh.md
+  - tests/verify_u_pgd_15_rhgd_closed_safe_point_refresh.py
 entradas:
 - id: 1
   caminho: README.md
@@ -367,6 +381,21 @@ entradas:
   - pgd-incremental-information-exchange-human-view
   produz: pgd-incremental-information-exchange-gate
   aceite: tests/verify_u_pgd_14_incremental_runtime_information_exchange.py
+- id: 51
+  caminho: dados/pgd-1.0/U-PGD-15-rhgd-closed-safe-point-refresh.yaml
+  tipo: dados
+  status: pendente
+  aceite: tests/verify_u_pgd_15_rhgd_closed_safe_point_refresh.py
+- id: 52
+  caminho: docs/U-PGD-15-rhgd-closed-safe-point-refresh.md
+  tipo: documentacao
+  status: pendente
+  aceite: tests/verify_u_pgd_15_rhgd_closed_safe_point_refresh.py
+- id: 53
+  caminho: tests/verify_u_pgd_15_rhgd_closed_safe_point_refresh.py
+  tipo: teste
+  status: pendente
+  aceite: tests/verify_u_pgd_15_rhgd_closed_safe_point_refresh.py
 auxiliar_construcao_conciliacao:
   habilitado: true
   papel: auxiliar
