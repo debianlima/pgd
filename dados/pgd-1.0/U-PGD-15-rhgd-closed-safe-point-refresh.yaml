@@ -1,0 +1,44 @@
+schema: pgd-rhgd-closed-safe-point-refresh/1
+unit: U-PGD-15-RHGD-CLOSED-SAFE-POINT-REFRESH
+observed_at: '2026-09-02T05:00:00Z'
+release:
+  version: 1.0.0
+  state: triad_ready
+  promoted: false
+refs:
+  PGD_BASE: fa63a046e79e28d512dd901c43629d47a5bdea89
+  PGD_FEDERATION_CONTRACT: pgd-rhgd-federation/1
+  PGD_FEDERATION_CONTRACT_SHA256: 3135f6cee8de163d55c9782b1b1de300359a0e2936f79f2a243a03941fefdc52
+  RHGD_CLOSED_SAFE_POINT: c74daa217f307b1fb8d78e10fe5218d8e496dbd8
+  RHGD_PROJECT_SKILL: 0.0.10
+  RHGD_OBSERVED_ACTIVE_HEAD: 397e03821954ebeb88780b6658efec95ecb095b7
+  RHGD_CATALOG_REF: 4b6e0a3a38a90273c3ba9a3c41841bd167a37cb1
+observed:
+  rhgd_safe_point_unit: U-RHGD-11-PGA-PROVIDER-STRUCTURAL-DRIFT-RECONCILIATION
+  rhgd_safe_point_contract_version: 4
+  rhgd_active_unit: U-RHGD-12-LIVE-CAPABILITY-DISCOVERY-CONTRACT
+  rhgd_active_unit_consumed: false
+  consumer_rule: consume_last_closed_safe_point_not_in_progress_head
+  provider_state: active_unit_exists_after_closed_safe_point
+  pgd_functional_change_required: false
+authority:
+  PGD: runtime_scheduler_execution
+  RHGD: discovery_federation_transport_no_scheduler
+compatibility:
+  federation_request_preserved: true
+  federation_response_execution_ref_preserved: true
+  rhgd_may_transport_only_after_pgd_execution_ref: true
+  rhgd_may_mint_assignment_or_lease: false
+  capability_discovery_owner: RHGD
+  runtime_owner: PGD
+gates:
+  DELTA_INVENTORY: PASS
+  LEARNING_PRESERVED: PASS
+  RHGD_SAFE_POINT_CLOSED: PASS
+  RHGD_SAFE_POINT_ANCESTOR: PASS
+  RHGD_U12_ACTIVE_NOT_CONSUMED: PASS
+  PGD_FEDERATION_CONTRACT_IDENTITY: PASS
+  NO_DUPLICATE_RUNTIME: PASS
+  HISTORICAL_EVIDENCE_IMMUTABLE: PASS
+  RELEASE_IMMUTABILITY: PASS
+  FUNCTIONAL_PGD_CHANGE_REQUIRED: 'NO'

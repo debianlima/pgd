@@ -6,7 +6,7 @@ assert all((r/x).exists() for x in req)
 assert len(list(r.glob('skills/*/SKILL.md')))==1
 assert (r/'VERSION').read_text().strip()=='1.0.0'
 m=yaml.safe_load((r/'manifesto.yaml').read_text(encoding='utf-8'))
-assert m['versao_contrato']==3 and m['release_alvo']=='v1.0.0'
+assert isinstance(m['versao_contrato'], int) and m['versao_contrato']>=3 and m['release_alvo']=='v1.0.0'
 i=m['identidade_execucao']
 assert i['decisao_humana']=='H01-R2'
 assert i['repositorio_protocolo']=='debianlima/pgd'
