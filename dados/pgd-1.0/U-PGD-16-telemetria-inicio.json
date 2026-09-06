@@ -1,0 +1,13 @@
+{
+  "event": "telemetria_inicio",
+  "timestamp_utc": "2026-09-06T05:41:43.899375Z",
+  "project": "pgd",
+  "unit": "U-PGD-16-COGNITIVE-WORKGRAPH-AND-AGGREGATION-BARRIER",
+  "classification": "observado",
+  "project_skill": "pgd-project@0.2.0",
+  "pgh_root_contract_commit": "07740f08120d70f3433e1ff1ef5a9164d3122bf8",
+  "ia_contract_commit": "6b2db1b813623cfc1fca41e1a35c9c6d7afe3dec",
+  "control_plane_registry_commit": "470826ec8d8b8604792aa864a573ba5b64c4599d",
+  "target_release": "PGH 2.2.0",
+  "tokens": "indisponivel"
+}

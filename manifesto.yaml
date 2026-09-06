@@ -429,7 +429,7 @@ entradas:
 - id: 57
   caminho: tests/verify_u_pgd_16_cognitive_workgraph.py
   tipo: teste
-  status: pendente
+  status: em_curso
   consome:
   - pgd-cognitive-workgraph-human-view
   produz: pgd-cognitive-workgraph-gate
@@ -437,7 +437,7 @@ entradas:
 - id: 58
   caminho: dados/pgd-1.0/U-PGD-16-telemetria-inicio.json
   tipo: dados
-  status: pendente
+  status: em_curso
   aceite: tests/verify_u_pgd_16_cognitive_workgraph.py
 - id: 59
   caminho: dados/pgd-1.0/U-PGD-16-telemetria-fim.json
