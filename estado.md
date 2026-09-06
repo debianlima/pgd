@@ -6,7 +6,7 @@
 - join incompleto retorna `WAIT_REQUIRED_SEGMENTS`; somente completion total libera `READY_FOR_MSGCD_COMPOSITION`.
 - Project-Skill permanece **byte-idêntica em `pgd-project@0.2.0`** porque U08 sela o blob `28a453...`; nenhuma mutação de skill/catalog version é permitida nesta unidade.
 - aprendizado U16 preservado no contrato/docs/evidência e será materializado no runtime canônico Control Plane.
-- gates U16/Project/U04..U16 serão reexecutados antes do fechamento.
+- `PASS_CLOSED`; ProjectVerify PASS; U04..U16 PASS; entradas 54–59 aceitas; reserva liberada. Project-Skill permanece `pgd-project@0.2.0` por U08 e não há bump de catálogo.
 
 # Estado — PGD 1.0.0 — contrato v3
 

@@ -1,0 +1,25 @@
+{
+  "event": "telemetria_fim",
+  "timestamp_utc": "2026-09-06T05:47:12.795635Z",
+  "project": "pgd",
+  "unit": "U-PGD-16-COGNITIVE-WORKGRAPH-AND-AGGREGATION-BARRIER",
+  "classification": "observado",
+  "result": "PASS_CLOSED",
+  "project_skill": "pgd-project@0.2.0",
+  "project_skill_mutation": "FORBIDDEN_BY_U08_HUMAN_RATIFICATION",
+  "immutable_skill_blob": "28a453019c254475380924ff05f70c9e4f096b90",
+  "catalog_version_change": "NOT_APPLICABLE_U08_IMMUTABLE",
+  "pgh_root_contract_commit": "07740f08120d70f3433e1ff1ef5a9164d3122bf8",
+  "ia_contract_commit": "6b2db1b813623cfc1fca41e1a35c9c6d7afe3dec",
+  "control_plane_registry_commit": "470826ec8d8b8604792aa864a573ba5b64c4599d",
+  "gates": [
+    "PGD_U16_COGNITIVE_WORKGRAPH=PASS",
+    "PGD_PROJECT_VERIFY=PASS",
+    "PGD_U04_U16_REGRESSION=PASS",
+    "PGD_U08_HUMAN_RATIFICATION=PASS",
+    "RUNTIME_PARALLEL_PROHIBITED=PASS",
+    "DEPENDENCY_REFERENCES=PASS_NO_VERSION_CHANGE",
+    "RECONCILIATION_CLOSURE=PASS"
+  ],
+  "tokens": "indisponivel"
+}
