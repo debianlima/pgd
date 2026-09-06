@@ -1,13 +1,12 @@
 # Estado — 2026-09-06 — U-PGD-16 cognitive workgraph
 
 ## Estado corrente
-- `ContextSegmentationPlan` agora possui ponte contratual explícita para WorkUnits/DAG PGD via `pgd-cognitive-workgraph/1`.
-- WorkUnits `COGNITIVE`, `TOOL_PREPROCESS` e `PHYSICAL_CHUNK` continuam sob fila/scheduler/lease PGD; ferramentas têm `authority=none`.
-- barrier de completion rejeita join incompleto com `WAIT_REQUIRED_SEGMENTS` e só libera `READY_FOR_MSGCD_COMPOSITION` quando todos os segmentos obrigatórios terminam.
-- RHGD permanece discovery/transporte; MSGCD composição após barrier; IA Geral apenas planejamento advisory.
-- `PGD_U16_COGNITIVE_WORKGRAPH=PASS`; `PGD_PROJECT_VERIFY=PASS`; regressão U04..U16 PASS.
-- runtime paralelo continua proibido; implementação canônica deste contrato será no Control Plane H01-R2.
-- próximo passo: promover aprendizado Project-Skill, sincronizar catálogo e fechar telemetria.
+- `pgd-cognitive-workgraph/1` materializa `ContextSegmentationPlan` em WorkUnits/DAG PGD e completion barrier para `ResultAggregationPlan`.
+- `COGNITIVE`, `TOOL_PREPROCESS` e `PHYSICAL_CHUNK` permanecem sob fila/scheduler/lease PGD; ferramenta tem `authority=none`.
+- join incompleto retorna `WAIT_REQUIRED_SEGMENTS`; somente completion total libera `READY_FOR_MSGCD_COMPOSITION`.
+- Project-Skill permanece **byte-idêntica em `pgd-project@0.2.0`** porque U08 sela o blob `28a453...`; nenhuma mutação de skill/catalog version é permitida nesta unidade.
+- aprendizado U16 preservado no contrato/docs/evidência e será materializado no runtime canônico Control Plane.
+- gates U16/Project/U04..U16 serão reexecutados antes do fechamento.
 
 # Estado — PGD 1.0.0 — contrato v3
 
