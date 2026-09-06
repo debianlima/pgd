@@ -1,6 +1,6 @@
 projeto: pgd
 nome: Protocolo de Gestao Distribuida
-versao_contrato: 4
+versao_contrato: 5
 release_alvo: v1.0.0
 estado_release: triad_ready
 repositorio: debianlima/pgd
@@ -15,7 +15,26 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado: {}
+trabalho_compartilhado:
+  projeto: pgd
+  caminho: /dev/shm/pgd-u16-cognitive-workgraph
+  unidade: U-PGD-16-COGNITIVE-WORKGRAPH-AND-AGGREGATION-BARRIER
+  descricao: formalizar ContextSegmentationPlan -> WorkUnits/DAG PGD e barrier de
+    completion para ResultAggregationPlan/MSGCD no PGH 2.2
+  agente: ChatGPT-Redes
+  atualizado_em: '2026-09-06T05:41:14Z'
+  previsao_termino: '2026-09-06T07:41:14Z'
+  zona_exclusao:
+  - manifesto.yaml
+  - estado.md
+  - contratos/pgd-1.0/cognitive-workgraph.schema.json
+  - dados/pgd-1.0/U-PGD-16-cognitive-workgraph.yaml
+  - docs/U-PGD-16-cognitive-workgraph.md
+  - tests/verify_u_pgd_16_cognitive_workgraph.py
+  - dados/pgd-1.0/U-PGD-16-telemetria-inicio.json
+  - dados/pgd-1.0/U-PGD-16-telemetria-fim.json
+  - skills/pgd/SKILL.md
+  - competencias.yaml
 entradas:
 - id: 1
   caminho: README.md
@@ -382,6 +401,49 @@ entradas:
   tipo: teste
   status: aceito
   aceite: tests/verify_u_pgd_15_rhgd_closed_safe_point_refresh.py
+- id: 54
+  caminho: contratos/pgd-1.0/cognitive-workgraph.schema.json
+  tipo: contrato
+  status: pendente
+  consome:
+  - ContextSegmentationPlan
+  - ResultAggregationPlan
+  produz: pgd-cognitive-workgraph-contract
+  aceite: tests/verify_u_pgd_16_cognitive_workgraph.py
+- id: 55
+  caminho: dados/pgd-1.0/U-PGD-16-cognitive-workgraph.yaml
+  tipo: dados
+  status: pendente
+  consome:
+  - pgd-cognitive-workgraph-contract
+  produz: pgd-cognitive-workgraph-evidence
+  aceite: tests/verify_u_pgd_16_cognitive_workgraph.py
+- id: 56
+  caminho: docs/U-PGD-16-cognitive-workgraph.md
+  tipo: documentacao
+  status: pendente
+  consome:
+  - pgd-cognitive-workgraph-evidence
+  produz: pgd-cognitive-workgraph-human-view
+  aceite: tests/verify_u_pgd_16_cognitive_workgraph.py
+- id: 57
+  caminho: tests/verify_u_pgd_16_cognitive_workgraph.py
+  tipo: teste
+  status: pendente
+  consome:
+  - pgd-cognitive-workgraph-human-view
+  produz: pgd-cognitive-workgraph-gate
+  aceite: tests/verify_u_pgd_16_cognitive_workgraph.py
+- id: 58
+  caminho: dados/pgd-1.0/U-PGD-16-telemetria-inicio.json
+  tipo: dados
+  status: pendente
+  aceite: tests/verify_u_pgd_16_cognitive_workgraph.py
+- id: 59
+  caminho: dados/pgd-1.0/U-PGD-16-telemetria-fim.json
+  tipo: dados
+  status: pendente
+  aceite: tests/verify_u_pgd_16_cognitive_workgraph.py
 auxiliar_construcao_conciliacao:
   habilitado: true
   papel: auxiliar
