@@ -1,0 +1,77 @@
+schema: pgd-cognitive-workgraph/1
+unit: U-PGD-16-COGNITIVE-WORKGRAPH-AND-AGGREGATION-BARRIER
+source_plans:
+  context_segmentation_plan_ref: ContextSegmentationPlan:seg-500k-docs-v1
+  result_aggregation_plan_ref: ResultAggregationPlan:agg-500k-docs-v1
+authority:
+  execution_owner: PGD
+  scheduler_owner: PGD
+  lease_authority: PGD
+  ia_geral_role: ADVISORY_PLAN_ONLY
+  rhgd_role: FEDERATION_DISCOVERY_TRANSPORT_ONLY
+  msgcd_role: COMPOSITION_AFTER_COMPLETION_BARRIER
+work_units:
+- work_unit_id: wu-pdf-marker
+  segment_id: seg-ingest
+  work_kind: TOOL_PREPROCESS
+  dependency_refs: []
+  context_refs: [artifact:pdf-source]
+  token_budget: 4096
+  target_capability_ref: capability:document-normalization
+  authorization_ref: auth:pgh22:docs
+  privacy_scope: organization
+  idempotency_key: task500k:marker:pdf-source
+  lease_requested_only: true
+  lease_granted_by: PGD
+  tool_ref: tool:marker
+  tool_authority: none
+  tool_output_provenance_required: true
+- work_unit_id: wu-python-analysis
+  segment_id: seg-python
+  work_kind: COGNITIVE
+  dependency_refs: []
+  context_refs: [context:500k:python]
+  token_budget: 120000
+  target_capability_ref: capability:programming.python
+  authorization_ref: auth:pgh22:docs
+  privacy_scope: organization
+  idempotency_key: task500k:seg-python
+  lease_requested_only: true
+  lease_granted_by: PGD
+- work_unit_id: wu-doc-analysis
+  segment_id: seg-docs
+  work_kind: COGNITIVE
+  dependency_refs: [wu-pdf-marker]
+  context_refs: [context:500k:documentation, artifact:marker-output]
+  token_budget: 120000
+  target_capability_ref: capability:documentation
+  authorization_ref: auth:pgh22:docs
+  privacy_scope: organization
+  idempotency_key: task500k:seg-docs
+  lease_requested_only: true
+  lease_granted_by: PGD
+- work_unit_id: wu-doc-chunk-2
+  segment_id: seg-docs-physical-2
+  work_kind: PHYSICAL_CHUNK
+  dependency_refs: [wu-pdf-marker]
+  context_refs: [context:500k:documentation]
+  token_budget: 120000
+  target_capability_ref: capability:documentation
+  authorization_ref: auth:pgh22:docs
+  privacy_scope: organization
+  idempotency_key: task500k:seg-docs:chunk2
+  lease_requested_only: true
+  lease_granted_by: PGD
+completion_barrier:
+  expected_segment_ids: [seg-python, seg-docs]
+  required_segment_ids: [seg-python, seg-docs]
+  completion_owner: PGD
+  composition_owner: MSGCD
+  reject_missing_required_segments: true
+  proof:
+    before_completed_segment_ids: [seg-python]
+    before_result: WAIT_REQUIRED_SEGMENTS
+    after_completed_segment_ids: [seg-python, seg-docs]
+    after_result: READY_FOR_MSGCD_COMPOSITION
+no_second_scheduler: true
+no_inference_level_scheduler: true

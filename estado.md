@@ -1,3 +1,14 @@
+# Estado — 2026-09-06 — U-PGD-16 cognitive workgraph
+
+## Estado corrente
+- `ContextSegmentationPlan` agora possui ponte contratual explícita para WorkUnits/DAG PGD via `pgd-cognitive-workgraph/1`.
+- WorkUnits `COGNITIVE`, `TOOL_PREPROCESS` e `PHYSICAL_CHUNK` continuam sob fila/scheduler/lease PGD; ferramentas têm `authority=none`.
+- barrier de completion rejeita join incompleto com `WAIT_REQUIRED_SEGMENTS` e só libera `READY_FOR_MSGCD_COMPOSITION` quando todos os segmentos obrigatórios terminam.
+- RHGD permanece discovery/transporte; MSGCD composição após barrier; IA Geral apenas planejamento advisory.
+- `PGD_U16_COGNITIVE_WORKGRAPH=PASS`; `PGD_PROJECT_VERIFY=PASS`; regressão U04..U16 PASS.
+- runtime paralelo continua proibido; implementação canônica deste contrato será no Control Plane H01-R2.
+- próximo passo: promover aprendizado Project-Skill, sincronizar catálogo e fechar telemetria.
+
 # Estado — PGD 1.0.0 — contrato v3
 
 ## Decisões vigentes

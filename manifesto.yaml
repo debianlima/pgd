@@ -404,7 +404,7 @@ entradas:
 - id: 54
   caminho: contratos/pgd-1.0/cognitive-workgraph.schema.json
   tipo: contrato
-  status: pendente
+  status: aceito
   consome:
   - ContextSegmentationPlan
   - ResultAggregationPlan
@@ -413,7 +413,7 @@ entradas:
 - id: 55
   caminho: dados/pgd-1.0/U-PGD-16-cognitive-workgraph.yaml
   tipo: dados
-  status: pendente
+  status: aceito
   consome:
   - pgd-cognitive-workgraph-contract
   produz: pgd-cognitive-workgraph-evidence
@@ -421,7 +421,7 @@ entradas:
 - id: 56
   caminho: docs/U-PGD-16-cognitive-workgraph.md
   tipo: documentacao
-  status: pendente
+  status: aceito
   consome:
   - pgd-cognitive-workgraph-evidence
   produz: pgd-cognitive-workgraph-human-view
@@ -429,7 +429,7 @@ entradas:
 - id: 57
   caminho: tests/verify_u_pgd_16_cognitive_workgraph.py
   tipo: teste
-  status: em_curso
+  status: aceito
   consome:
   - pgd-cognitive-workgraph-human-view
   produz: pgd-cognitive-workgraph-gate
@@ -437,7 +437,7 @@ entradas:
 - id: 58
   caminho: dados/pgd-1.0/U-PGD-16-telemetria-inicio.json
   tipo: dados
-  status: em_curso
+  status: aceito
   aceite: tests/verify_u_pgd_16_cognitive_workgraph.py
 - id: 59
   caminho: dados/pgd-1.0/U-PGD-16-telemetria-fim.json

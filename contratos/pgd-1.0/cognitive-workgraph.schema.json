@@ -1,0 +1,21 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://pgh.local/contracts/pgd-1.0/cognitive-workgraph.schema.json",
+  "title":"PGD Cognitive WorkGraph and Aggregation Barrier",
+  "type":"object","additionalProperties":false,
+  "required":["schema","unit","source_plans","authority","work_units","completion_barrier","no_second_scheduler","no_inference_level_scheduler"],
+  "properties":{
+    "schema":{"const":"pgd-cognitive-workgraph/1"},
+    "unit":{"const":"U-PGD-16-COGNITIVE-WORKGRAPH-AND-AGGREGATION-BARRIER"},
+    "source_plans":{"type":"object","additionalProperties":false,"required":["context_segmentation_plan_ref","result_aggregation_plan_ref"],"properties":{"context_segmentation_plan_ref":{"type":"string","minLength":1},"result_aggregation_plan_ref":{"type":"string","minLength":1}}},
+    "authority":{"type":"object","additionalProperties":false,"required":["execution_owner","scheduler_owner","lease_authority","ia_geral_role","rhgd_role","msgcd_role"],"properties":{"execution_owner":{"const":"PGD"},"scheduler_owner":{"const":"PGD"},"lease_authority":{"const":"PGD"},"ia_geral_role":{"const":"ADVISORY_PLAN_ONLY"},"rhgd_role":{"const":"FEDERATION_DISCOVERY_TRANSPORT_ONLY"},"msgcd_role":{"const":"COMPOSITION_AFTER_COMPLETION_BARRIER"}}},
+    "work_units":{"type":"array","minItems":1,"items":{"$ref":"#/$defs/workUnit"}},
+    "completion_barrier":{"$ref":"#/$defs/barrier"},
+    "no_second_scheduler":{"const":true},
+    "no_inference_level_scheduler":{"const":true}
+  },
+  "$defs":{
+    "workUnit":{"type":"object","additionalProperties":false,"required":["work_unit_id","segment_id","work_kind","dependency_refs","context_refs","token_budget","target_capability_ref","authorization_ref","privacy_scope","idempotency_key","lease_requested_only","lease_granted_by"],"properties":{"work_unit_id":{"type":"string","minLength":1},"segment_id":{"type":"string","minLength":1},"work_kind":{"enum":["COGNITIVE","TOOL_PREPROCESS","PHYSICAL_CHUNK"]},"dependency_refs":{"type":"array","uniqueItems":true,"items":{"type":"string"}},"context_refs":{"type":"array","minItems":1,"items":{"type":"string"}},"token_budget":{"type":"integer","minimum":1},"target_capability_ref":{"type":"string","minLength":1},"authorization_ref":{"type":"string","minLength":1},"privacy_scope":{"enum":["private","organization","team","public"]},"idempotency_key":{"type":"string","minLength":1},"lease_requested_only":{"const":true},"lease_granted_by":{"const":"PGD"},"tool_ref":{"type":"string","minLength":1},"tool_authority":{"const":"none"},"tool_output_provenance_required":{"const":true}}},
+    "barrier":{"type":"object","additionalProperties":false,"required":["expected_segment_ids","required_segment_ids","completion_owner","composition_owner","reject_missing_required_segments","proof"],"properties":{"expected_segment_ids":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},"required_segment_ids":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},"completion_owner":{"const":"PGD"},"composition_owner":{"const":"MSGCD"},"reject_missing_required_segments":{"const":true},"proof":{"type":"object","additionalProperties":false,"required":["before_completed_segment_ids","before_result","after_completed_segment_ids","after_result"],"properties":{"before_completed_segment_ids":{"type":"array","uniqueItems":true,"items":{"type":"string"}},"before_result":{"const":"WAIT_REQUIRED_SEGMENTS"},"after_completed_segment_ids":{"type":"array","uniqueItems":true,"items":{"type":"string"}},"after_result":{"const":"READY_FOR_MSGCD_COMPOSITION"}}}}}
+  }
+}
