@@ -11,7 +11,8 @@
 - exemplos `SUCCEEDED` e `FAILED` validam no mesmo schema; `outcome_id` é a referência canônica para `outcome_evidence_ref`; `completion_owner=PGD`, RHGD apenas transporta.
 - fences contratados: `project_ref + work_unit_id + agent_id + assignment_epoch`; `lease_ref` permanece nullable por compatibilidade com o runtime atual.
 - U17 PASS, ProjectVerify PASS e regressão U16 PASS; entradas 60–64 aceitas; entrada 65/`telemetria_fim` ainda pendente.
-- Project-Skill `pgd-project@0.2.0` e catálogo permanecem imutáveis por U08; próxima etapa: regressão PGD completa, reconciliação/referências e fechamento.
+- regressão completa `ProjectVerify + release + U04..U17` = PASS; `REFERENCE_AUDIT=PASS`; `DELTA_INVENTORY=PASS`; `LEARNING_PRESERVED=PASS`; `DEPENDENCY_REFERENCES=PASS`.
+- Project-Skill permanece blob `28a453019c254475380924ff05f70c9e4f096b90`; catálogo remoto `157ba1e` mantém `pgd-project@0.2.0`, portanto `CATALOG_SYNC=SYNC_NOOP`. Próximo passo: shadow final, `telemetria_fim` e liberar reserva.
 
 # Estado — 2026-09-06 — U-PGD-16 cognitive workgraph
 
