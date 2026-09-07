@@ -444,7 +444,7 @@ entradas:
 - id: 60
   caminho: contratos/pgd-1.0/work-unit-execution-outcome.schema.json
   tipo: contrato
-  status: pendente
+  status: aceito
   consome:
   - pgd-rhgd-federation-contract
   - pgd-cognitive-workgraph-contract
@@ -469,7 +469,7 @@ entradas:
 - id: 63
   caminho: tests/verify_u_pgd_17_work_unit_execution_outcome.py
   tipo: teste
-  status: em_curso
+  status: aceito
   consome:
   - pgd-work-unit-execution-outcome-human-view
   produz: pgd-work-unit-execution-outcome-gate
