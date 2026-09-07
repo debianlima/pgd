@@ -453,7 +453,7 @@ entradas:
 - id: 61
   caminho: dados/pgd-1.0/U-PGD-17-work-unit-execution-outcome.yaml
   tipo: dados
-  status: pendente
+  status: aceito
   consome:
   - pgd-work-unit-execution-outcome-contract
   produz: pgd-work-unit-execution-outcome-evidence
@@ -461,7 +461,7 @@ entradas:
 - id: 62
   caminho: docs/U-PGD-17-work-unit-execution-outcome.md
   tipo: documentacao
-  status: pendente
+  status: aceito
   consome:
   - pgd-work-unit-execution-outcome-evidence
   produz: pgd-work-unit-execution-outcome-human-view

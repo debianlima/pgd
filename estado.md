@@ -7,7 +7,11 @@
 - fences reais existentes: `project_ref + work_unit_id + agent_id + assignment_epoch`; `lease_ref` federado permanece opcional/nulo porque o claim canônico atual usa `lease_until` e não emite lease ref próprio.
 - objetivo: resultado terminal `SUCCEEDED|FAILED` como evidência observada, idempotente, com output/error mutuamente exclusivos, proveniência e metadata de modelo somente observada. Completion continua autoridade PGD; RHGD apenas transporta.
 - Project-Skill `pgd-project@0.2.0` permanece byte-idêntica por ratificação U08; nenhuma promoção de skill/catálogo é autorizada nesta unidade.
-- `trabalho_compartilhado` reservado; próximo evento executável obrigatório: `telemetria_inicio`.
+- `telemetria_inicio` foi o primeiro evento executável; contrato `pgd-work-unit-execution-outcome/1` publicado em `7cf9d94`.
+- exemplos `SUCCEEDED` e `FAILED` validam no mesmo schema; `outcome_id` é a referência canônica para `outcome_evidence_ref`; `completion_owner=PGD`, RHGD apenas transporta.
+- fences contratados: `project_ref + work_unit_id + agent_id + assignment_epoch`; `lease_ref` permanece nullable por compatibilidade com o runtime atual.
+- U17 PASS, ProjectVerify PASS e regressão U16 PASS; entradas 60–64 aceitas; entrada 65/`telemetria_fim` ainda pendente.
+- Project-Skill `pgd-project@0.2.0` e catálogo permanecem imutáveis por U08; próxima etapa: regressão PGD completa, reconciliação/referências e fechamento.
 
 # Estado — 2026-09-06 — U-PGD-16 cognitive workgraph
 

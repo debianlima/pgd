@@ -1,0 +1,101 @@
+schema: pgd-work-unit-execution-outcome-evidence/1
+unit: U-PGD-17-WORK-UNIT-EXECUTION-OUTCOME
+classification: observado_e_derivado_de_gates
+contract_commit: 7cf9d94a5762dcf5fa87935a16ad8bb37b9da973
+references:
+  pgd_rhgd_federation_schema: contratos/pgd-1.0/rhgd-federation.schema.json
+  pgd_rhgd_federation_blob: 9d85ff1c7095917476877d59fd89dc6e63d4d783
+  rhgd_observed_commit: 950cc15b93b4eb87f12a1854ed551f8fa70988a9
+  control_plane_u293_commit: c92276449e8f568b64a87f14f93c0a0b314f832d
+boundary:
+  reporter: execution_worker_or_transport
+  completion_owner: PGD
+  federation_owner: RHGD_transport_only
+  outcome_classification: observed
+  authority_effect: NONE
+  outcome_evidence_ref_semantics: points_to_outcome_id
+  assignment_fence:
+  - project_ref
+  - work_unit_id
+  - agent_id
+  - assignment_epoch
+  lease_ref: optional_nullable_for_federation_compatibility
+sample_success:
+  schema_version: pgd-work-unit-execution-outcome/1
+  outcome_id: outcome://project-final/FSWU-001/epoch-1
+  project_ref: project-final
+  work_unit_id: FSWU-001
+  execution_ref: pgd://execution/project-final/FSWU-001/1
+  assignment:
+    agent_id: synth-worker
+    assignment_epoch: 1
+  lease_ref: null
+  status: SUCCEEDED
+  retryable: false
+  outcome_classification: observed
+  completion_owner: PGD
+  authority_effect: NONE
+  completed_at: '2026-09-06T23:00:00Z'
+  idempotency_key: outcome:project-final:FSWU-001:1
+  provenance_refs:
+  - cogctx://task-doc
+  - msgcd://composition/task-doc
+  evidence_refs:
+  - evidence://worker/final-001
+  runtime_observation:
+    model_ref: model-synthesis-B
+    model_version: '2'
+    host_ref: host://worker-7
+    transport_ref: netmaker://peer-7
+  result:
+    result_ref: result://project-final/FSWU-001/1
+    output_schema_ref: schema://unified-documentation-result/1
+    content_hash: sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    payload:
+      content: documentacao final
+  error: null
+sample_failure:
+  schema_version: pgd-work-unit-execution-outcome/1
+  outcome_id: outcome://project-final/FSWU-001/epoch-1-failed
+  project_ref: project-final
+  work_unit_id: FSWU-001
+  execution_ref: pgd://execution/project-final/FSWU-001/1
+  assignment:
+    agent_id: synth-worker
+    assignment_epoch: 1
+  lease_ref: null
+  status: FAILED
+  retryable: true
+  outcome_classification: observed
+  completion_owner: PGD
+  authority_effect: NONE
+  completed_at: '2026-09-06T23:00:00Z'
+  idempotency_key: outcome:project-final:FSWU-001:1
+  provenance_refs:
+  - cogctx://task-doc
+  - msgcd://composition/task-doc
+  evidence_refs:
+  - evidence://worker/failure-001
+  runtime_observation:
+    model_ref: model-synthesis-B
+    model_version: '2'
+    host_ref: host://worker-7
+    transport_ref: netmaker://peer-7
+  result: null
+  error:
+    code: MODEL_RUNTIME_UNAVAILABLE
+    message: worker perdeu o runtime antes da conclusao
+    evidence_refs:
+    - evidence://worker/failure-001
+gates:
+  PGD_U17_WORK_UNIT_OUTCOME: PASS
+  TERMINAL_STATUS: SUCCEEDED_OR_FAILED
+  RHGD_OUTCOME_EVIDENCE_REF_COMPAT: PASS
+  COMPLETION_OWNER: PGD
+  ASSIGNMENT_FENCE: PASS
+  RUNTIME_SELECTION_AUTHORITY: NONE
+  PROJECT_VERIFY: PASS
+  U16_REGRESSION: PASS
+  RELEASE_IMMUTABILITY: PASS
+  PROJECT_SKILL_BYTE_IDENTICAL: PASS
+status: FUNCTIONAL_SAFEPOINT_CLOSURE_PENDING

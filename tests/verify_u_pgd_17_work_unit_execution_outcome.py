@@ -107,6 +107,15 @@ def main() -> int:
     assert set(response['outcome_evidence_ref']['type'])=={'string','null'}
     assert success['outcome_id'].startswith('outcome://')
 
+    evidence=yaml.safe_load((ROOT/'dados/pgd-1.0/U-PGD-17-work-unit-execution-outcome.yaml').read_text(encoding='utf-8'))
+    jsonschema.validate(evidence['sample_success'],schema,format_checker=jsonschema.FormatChecker())
+    jsonschema.validate(evidence['sample_failure'],schema,format_checker=jsonschema.FormatChecker())
+    assert evidence['boundary']['completion_owner']=='PGD'
+    assert evidence['boundary']['federation_owner']=='RHGD_transport_only'
+    assert evidence['boundary']['outcome_evidence_ref_semantics']=='points_to_outcome_id'
+    docs=(ROOT/'docs/U-PGD-17-work-unit-execution-outcome.md').read_text(encoding='utf-8')
+    assert 'Somente PGD' in docs and 'outcome_evidence_ref' in docs and 'assignment_epoch' in docs
+
     manifest=yaml.safe_load((ROOT/'manifesto.yaml').read_text(encoding='utf-8'))
     assert manifest['release_alvo']=='v1.0.0'
     assert manifest['identidade_execucao']['repositorio_implementacao_canonica']=='debianlima/pgh-distributed-session-control-plane'
