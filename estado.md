@@ -1,3 +1,14 @@
+# Estado — 2026-09-06 — U-PGD-17 WorkUnit Execution Outcome
+
+## Estado corrente
+- unidade `U-PGD-17-WORK-UNIT-EXECUTION-OUTCOME` declarada sob `pgd-project@0.2.0`; release `v1.0.0` permanece imutável; contrato estrutural avança para v6.
+- lacuna observada: `pgd-rhgd-federation/1` já prevê `SUCCEEDED|FAILED`, `execution_ref`, `lease_ref`, `outcome_evidence_ref`, `retryable` e `outcome_classification=observed`, mas não existe objeto canônico para `outcome_evidence_ref`.
+- runtime Control Plane U293 já materializa/claim a WorkUnit final; esta unidade PGD é normativa e não implementa runtime paralelo.
+- fences reais existentes: `project_ref + work_unit_id + agent_id + assignment_epoch`; `lease_ref` federado permanece opcional/nulo porque o claim canônico atual usa `lease_until` e não emite lease ref próprio.
+- objetivo: resultado terminal `SUCCEEDED|FAILED` como evidência observada, idempotente, com output/error mutuamente exclusivos, proveniência e metadata de modelo somente observada. Completion continua autoridade PGD; RHGD apenas transporta.
+- Project-Skill `pgd-project@0.2.0` permanece byte-idêntica por ratificação U08; nenhuma promoção de skill/catálogo é autorizada nesta unidade.
+- `trabalho_compartilhado` reservado; próximo evento executável obrigatório: `telemetria_inicio`.
+
 # Estado — 2026-09-06 — U-PGD-16 cognitive workgraph
 
 ## Estado corrente

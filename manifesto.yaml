@@ -1,6 +1,6 @@
 projeto: pgd
 nome: Protocolo de Gestao Distribuida
-versao_contrato: 5
+versao_contrato: 6
 release_alvo: v1.0.0
 estado_release: triad_ready
 repositorio: debianlima/pgd
@@ -15,7 +15,23 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado: {}
+trabalho_compartilhado:
+  projeto: pgd
+  caminho: /run/pgd-u17-work-unit-outcome
+  unidade: U-PGD-17-WORK-UNIT-EXECUTION-OUTCOME
+  descricao: formalizar evidencia terminal observada de execucao de WorkUnit para completion PGD e outcome_evidence_ref federado sem ampliar autoridade RHGD
+  agente: ChatGPT-Redes
+  atualizado_em: '2026-09-07T00:13:54Z'
+  previsao_termino: '2026-09-07T04:13:54Z'
+  zona_exclusao:
+  - manifesto.yaml
+  - estado.md
+  - contratos/pgd-1.0/work-unit-execution-outcome.schema.json
+  - dados/pgd-1.0/U-PGD-17-work-unit-execution-outcome.yaml
+  - docs/U-PGD-17-work-unit-execution-outcome.md
+  - tests/verify_u_pgd_17_work_unit_execution_outcome.py
+  - dados/pgd-1.0/U-PGD-17-telemetria-inicio.json
+  - dados/pgd-1.0/U-PGD-17-telemetria-fim.json
 entradas:
 - id: 1
   caminho: README.md
@@ -425,6 +441,54 @@ entradas:
   tipo: dados
   status: aceito
   aceite: tests/verify_u_pgd_16_cognitive_workgraph.py
+- id: 60
+  caminho: contratos/pgd-1.0/work-unit-execution-outcome.schema.json
+  tipo: contrato
+  status: pendente
+  consome:
+  - pgd-rhgd-federation-contract
+  - pgd-cognitive-workgraph-contract
+  produz: pgd-work-unit-execution-outcome-contract
+  aceite: tests/verify_u_pgd_17_work_unit_execution_outcome.py
+- id: 61
+  caminho: dados/pgd-1.0/U-PGD-17-work-unit-execution-outcome.yaml
+  tipo: dados
+  status: pendente
+  consome:
+  - pgd-work-unit-execution-outcome-contract
+  produz: pgd-work-unit-execution-outcome-evidence
+  aceite: tests/verify_u_pgd_17_work_unit_execution_outcome.py
+- id: 62
+  caminho: docs/U-PGD-17-work-unit-execution-outcome.md
+  tipo: documentacao
+  status: pendente
+  consome:
+  - pgd-work-unit-execution-outcome-evidence
+  produz: pgd-work-unit-execution-outcome-human-view
+  aceite: tests/verify_u_pgd_17_work_unit_execution_outcome.py
+- id: 63
+  caminho: tests/verify_u_pgd_17_work_unit_execution_outcome.py
+  tipo: teste
+  status: pendente
+  consome:
+  - pgd-work-unit-execution-outcome-human-view
+  produz: pgd-work-unit-execution-outcome-gate
+  aceite: tests/verify_u_pgd_17_work_unit_execution_outcome.py
+- id: 64
+  caminho: dados/pgd-1.0/U-PGD-17-telemetria-inicio.json
+  tipo: dados
+  status: pendente
+  consome: []
+  produz: U-PGD-17-TELEMETRIA-INICIO
+  aceite: tests/verify_u_pgd_17_work_unit_execution_outcome.py
+- id: 65
+  caminho: dados/pgd-1.0/U-PGD-17-telemetria-fim.json
+  tipo: dados
+  status: pendente
+  consome:
+  - pgd-work-unit-execution-outcome-gate
+  produz: U-PGD-17-TELEMETRIA-FIM
+  aceite: tests/verify_u_pgd_17_work_unit_execution_outcome.py
 auxiliar_construcao_conciliacao:
   habilitado: true
   papel: auxiliar
