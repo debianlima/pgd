@@ -1,0 +1,15 @@
+{
+  "event": "telemetria_inicio",
+  "timestamp_utc": "2026-09-07T00:14:51.902715Z",
+  "project": "pgd",
+  "unit": "U-PGD-17-WORK-UNIT-EXECUTION-OUTCOME",
+  "classification": "observado",
+  "project_skill": "pgd-project@0.2.0",
+  "method": "desenvolvedor-de-software@15",
+  "pgd_base_commit": "fd41fd544a2894ac87c9c9fb7a8a856c9f99a0de",
+  "rhgd_reference_commit": "950cc15b93b4eb87f12a1854ed551f8fa70988a9",
+  "control_plane_u293_commit": "c92276449e8f568b64a87f14f93c0a0b314f832d",
+  "target": "terminal WorkUnit execution outcome evidence for PGD completion and federation outcome_evidence_ref",
+  "release": "v1.0.0-preserved",
+  "tokens": "indisponivel"
+}
