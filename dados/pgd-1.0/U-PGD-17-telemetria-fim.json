@@ -1,0 +1,28 @@
+{
+  "event": "telemetria_fim",
+  "timestamp_utc": "2026-09-07T00:23:12.495013Z",
+  "project": "pgd",
+  "unit": "U-PGD-17-WORK-UNIT-EXECUTION-OUTCOME",
+  "classification": "observado",
+  "result": "PASS_CLOSED",
+  "project_skill_used": "pgd-project@0.2.0",
+  "project_skill_blob": "28a453019c254475380924ff05f70c9e4f096b90",
+  "catalog_sync": "SYNC_NOOP",
+  "contract_commit": "7cf9d94a5762dcf5fa87935a16ad8bb37b9da973",
+  "gates": [
+    "PGD_U17_WORK_UNIT_OUTCOME=PASS",
+    "PGD_PROJECT_VERIFY=PASS",
+    "PGD_RELEASE_1_0=PASS",
+    "PGD_U04_U17_FULL_REGRESSION=PASS",
+    "REFERENCE_AUDIT=PASS",
+    "DELTA_INVENTORY=PASS",
+    "LEARNING_PRESERVED=PASS",
+    "DEPENDENCY_REFERENCES=PASS",
+    "RECONCILIATION_CLOSURE=PASS",
+    "RHGD_OUTCOME_EVIDENCE_REF_COMPAT=PASS",
+    "COMPLETION_OWNER=PGD",
+    "RELEASE_IMMUTABILITY=PASS",
+    "PROJECT_SKILL_BYTE_IDENTICAL=PASS"
+  ],
+  "tokens": "indisponivel"
+}

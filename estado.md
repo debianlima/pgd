@@ -12,7 +12,8 @@
 - fences contratados: `project_ref + work_unit_id + agent_id + assignment_epoch`; `lease_ref` permanece nullable por compatibilidade com o runtime atual.
 - U17 PASS, ProjectVerify PASS e regressão U16 PASS; entradas 60–64 aceitas; entrada 65/`telemetria_fim` ainda pendente.
 - regressão completa `ProjectVerify + release + U04..U17` = PASS; `REFERENCE_AUDIT=PASS`; `DELTA_INVENTORY=PASS`; `LEARNING_PRESERVED=PASS`; `DEPENDENCY_REFERENCES=PASS`.
-- Project-Skill permanece blob `28a453019c254475380924ff05f70c9e4f096b90`; catálogo remoto `157ba1e` mantém `pgd-project@0.2.0`, portanto `CATALOG_SYNC=SYNC_NOOP`. Próximo passo: shadow final, `telemetria_fim` e liberar reserva.
+- U-PGD-17 `PASS_CLOSED`: `RECONCILIATION_CLOSURE=PASS`, release `v1.0.0` preservado, Project-Skill blob `28a453...` byte-idêntico, catálogo `SYNC_NOOP`, reserva liberada e `telemetria_fim` é o último evento.
+- próximo consumidor: Control Plane U294 deve ingerir `pgd-work-unit-execution-outcome/1`, fencear assignment vivo e aplicar completion idempotente no `TASK_MAP`; RHGD continua apenas transporte.
 
 # Estado — 2026-09-06 — U-PGD-16 cognitive workgraph
 

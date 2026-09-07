@@ -15,23 +15,7 @@ identidade_execucao:
   regra_fronteira: PGH autoriza; PGD executa
   gate: PGD_IDENTITY_H01_R2=PASS
 skill_projeto: skills/pgd/SKILL.md
-trabalho_compartilhado:
-  projeto: pgd
-  caminho: /run/pgd-u17-work-unit-outcome
-  unidade: U-PGD-17-WORK-UNIT-EXECUTION-OUTCOME
-  descricao: formalizar evidencia terminal observada de execucao de WorkUnit para completion PGD e outcome_evidence_ref federado sem ampliar autoridade RHGD
-  agente: ChatGPT-Redes
-  atualizado_em: '2026-09-07T00:13:54Z'
-  previsao_termino: '2026-09-07T04:13:54Z'
-  zona_exclusao:
-  - manifesto.yaml
-  - estado.md
-  - contratos/pgd-1.0/work-unit-execution-outcome.schema.json
-  - dados/pgd-1.0/U-PGD-17-work-unit-execution-outcome.yaml
-  - docs/U-PGD-17-work-unit-execution-outcome.md
-  - tests/verify_u_pgd_17_work_unit_execution_outcome.py
-  - dados/pgd-1.0/U-PGD-17-telemetria-inicio.json
-  - dados/pgd-1.0/U-PGD-17-telemetria-fim.json
+trabalho_compartilhado: {}
 entradas:
 - id: 1
   caminho: README.md
@@ -484,7 +468,7 @@ entradas:
 - id: 65
   caminho: dados/pgd-1.0/U-PGD-17-telemetria-fim.json
   tipo: dados
-  status: pendente
+  status: aceito
   consome:
   - pgd-work-unit-execution-outcome-gate
   produz: U-PGD-17-TELEMETRIA-FIM
